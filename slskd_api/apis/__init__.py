@@ -5,5 +5,6 @@ from .options import OptionsApi
 from .rooms import RoomsApi
 from .searches import SearchesApi
 from .server import ServerApi
+from .session import SessionApi
 from .transfers import TransfersApi
 from .users import UsersApi

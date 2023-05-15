@@ -24,6 +24,7 @@ class SlskdClient:
             'X-API-Key': api_key
         }
         base_args = (api_url, header)
+        
         self.application = ApplicationApi(*base_args)
         self.conversations = ConversationsApi(*base_args)
         self.logs = LogsApi(*base_args)
@@ -31,6 +32,7 @@ class SlskdClient:
         self.rooms = RoomsApi(*base_args)
         self.searches = SearchesApi(*base_args)
         self.server = ServerApi(*base_args)
+        self.session = SessionApi(*base_args)
         self.transfers = TransfersApi(*base_args)
         self.users = UsersApi(*base_args)
     
