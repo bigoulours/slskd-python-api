@@ -21,7 +21,7 @@ class SearchesApi(BaseApi):
         """
         url = self.api_url + '/searches'
         data = {
-            "id": uuid.uuid1(),
+            "id": str(uuid.uuid1()),
             "fileLimit": fileLimit,
             "filterResponses": filterResponses,
             "maximumPeerQueueLength": maximumPeerQueueLength,
