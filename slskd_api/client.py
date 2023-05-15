@@ -32,6 +32,7 @@ class SlskdClient:
         self.searches = SearchesApi(*base_args)
         self.server = ServerApi(*base_args)
         self.transfers = TransfersApi(*base_args)
+        self.users = UsersApi(*base_args)
     
 
 class MetricsApi:
