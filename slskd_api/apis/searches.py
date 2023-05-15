@@ -8,13 +8,13 @@ class SearchesApi(BaseApi):
 
     def search_text(self,
                     searchText,
-                    fileLimit=1000,
+                    fileLimit=10000,
                     filterResponses=True,
                     maximumPeerQueueLength=10,
                     minimumPeerUploadSpeed=0,
                     minimumResponseFileCount=1,
-                    responseLimit=50,
-                    searchTimeout=5
+                    responseLimit=500,
+                    searchTimeout=5000 # in ms
         ):
         """
         Performs a search for the specified request.
@@ -45,7 +45,7 @@ class SearchesApi(BaseApi):
         return response.json()
     
 
-    def get_search_state(self, id, includeResponses=False):
+    def state(self, id, includeResponses=False):
         """
         Gets the state of the search corresponding to the specified id.
         """
@@ -57,25 +57,25 @@ class SearchesApi(BaseApi):
         return response.json()
     
 
-    def stop_search(self, id):
+    def stop(self, id):
         """
         Stops the search corresponding to the specified id.
         """
         url = self.api_url + f'/searches/{id}'
         response = requests.put(url, headers=self.header)
-        return response.json()
+        return response.ok
     
 
-    def delete_search(self, id):
+    def delete(self, id):
         """
         Stops the search corresponding to the specified id.
         """
         url = self.api_url + f'/searches/{id}'
         response = requests.delete(url, headers=self.header)
-        return response.json()
+        return response.ok
     
 
-    def get_search_responses(self, id):
+    def search_responses(self, id):
         """
         Gets search responses corresponding to the specified id.
         """
