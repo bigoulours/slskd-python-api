@@ -6,5 +6,6 @@ from .rooms import RoomsApi
 from .searches import SearchesApi
 from .server import ServerApi
 from .session import SessionApi
+from .shares import SharesApi
 from .transfers import TransfersApi
 from .users import UsersApi
