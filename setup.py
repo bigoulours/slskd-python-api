@@ -14,6 +14,10 @@ setup(
     install_requires=[
         'requests>=2.25.1',
     ],
+    project_urls={
+        'Documentation': 'https://slskd-api.readthedocs.io',
+        'Source': 'https://github.com/bigoulours/slskd-python-api',
+    },
     author='bigoulours',
     description = 'API Wrapper to interact with slskd',
     python_requires='>=3.7',
