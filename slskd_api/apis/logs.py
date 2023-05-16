@@ -1,6 +1,9 @@
 from .base import *
 
 class LogsApi(BaseApi):
+    """
+    This class contains the methods to interact with the Logs API.
+    """
 
     def get(self):
         """

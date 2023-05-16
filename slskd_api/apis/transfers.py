@@ -1,6 +1,9 @@
 from .base import *
 
 class TransfersApi(BaseApi):
+    """
+    This class contains the methods to interact with the Transfers API.
+    """
 
     def cancel_download(self, username, id, remove=False):
         """

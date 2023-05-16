@@ -1,6 +1,9 @@
 from .base import *
 
 class UsersApi(BaseApi):
+    """
+    This class contains the methods to interact with the Users API.
+    """
 
     def endpoint(self, username):
         """

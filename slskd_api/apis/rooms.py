@@ -1,6 +1,9 @@
 from .base import *
 
 class RoomsApi(BaseApi):
+    """
+    This class contains the methods to interact with the Rooms API.
+    """
 
     def get_all_joined(self):
         """

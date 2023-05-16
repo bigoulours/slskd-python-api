@@ -1,6 +1,9 @@
 from .base import *
 
 class SharesApi(BaseApi):
+    """
+    This class contains the methods to interact with the Shares API.
+    """
 
     def get_all(self):
         """

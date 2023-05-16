@@ -1,6 +1,9 @@
 from .base import *
 
 class SessionApi(BaseApi):
+    """
+    This class contains the methods to interact with the Server API.
+    """
 
     def auth_valid(self):
         """

@@ -9,3 +9,17 @@ from .session import SessionApi
 from .shares import SharesApi
 from .transfers import TransfersApi
 from .users import UsersApi
+
+__all__ = (
+    'ApplicationApi',
+    'ConversationsApi',
+    'LogsApi',
+    'OptionsApi',
+    'RoomsApi',
+    'SearchesApi',
+    'ServerApi',
+    'SessionApi',
+    'SharesApi',
+    'TransfersApi',
+    'UsersApi'
+)

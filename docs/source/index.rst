@@ -1,10 +1,10 @@
 Welcome to slskd-python-api's documentation!
 ============================================
 
-**slskd-python-api** is a Python library to interact with slskd.
+**slskd-python-api** is a Python library to interact with `slskd <https://github.com/slskd/slskd/tree/master>`_.
 
 Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
+installation and basic examples.
 
 .. note::
 

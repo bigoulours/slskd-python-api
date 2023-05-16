@@ -1,6 +1,9 @@
 from .base import *
 
 class ApplicationApi(BaseApi):
+    """
+    This class contains the methods to interact with the Application API.
+    """
 
     def state(self):
         """

@@ -10,11 +10,9 @@ class SlskdClient:
     """
     The main class that allows access to the different APIs of a slskd instance.
     An API-Key with appropriate permissions (`readwrite` for most use cases) must be set in slskd config file.
-    e.g.:
-    ```
-    slskd = slskd_api.SlskdClient(host, api_key, url_base)
-    app_status = slskd.application.state()
-    ```
+    Usage::
+        slskd = slskd_api.SlskdClient(host, api_key, url_base)
+        app_status = slskd.application.state()
     """
 
     def __init__(self, host, api_key, url_base='/'):
@@ -43,11 +41,9 @@ class MetricsApi:
     Getting the metrics works with a different end point. Default: <slskd_url>:5030/metrics.
     Metrics should be first activated in slskd config file.
     User/pass is independent from the main application and default value (slskd:slskd) should be changed.
-    e.g.:
-    ```
-    metrics_conn = slskd_api.MetricsApi(host, metrics_usr='slskd', metrics_pwd='slskd')
-    metrics = metrics_conn.get()
-    ```
+    Usage::
+        metrics_conn = slskd_api.MetricsApi(host, metrics_usr='slskd', metrics_pwd='slskd')
+        metrics = metrics_conn.get()
     """
 
     def __init__(self, host, metrics_usr=None, metrics_pwd=None, metrics_url_base='/metrics'):
@@ -59,5 +55,8 @@ class MetricsApi:
         }
 
     def get(self):
+        """
+        Gets the Prometheus metrics as text.
+        """
         response = requests.get(self.metrics_url, headers=self.header)
         return response.text

@@ -1,6 +1,9 @@
 from .base import *
 
 class ConversationsApi(BaseApi):
+    """
+    This class contains the methods to interact with the Conversations API.
+    """
 
     def acknowledge(self, username, id):
         """
