@@ -10,6 +10,7 @@ setup(
     setup_requires = ["setuptools-git-versioning"],
     packages=find_packages(),
     long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     install_requires=[
         'requests>=2.25.1',
     ],
