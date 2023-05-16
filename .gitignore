@@ -1,2 +1,9 @@
-.vscode
 __pycache__
+
+.eggs
+*.egg-info
+.hypothesis
+.vscode
+
+build
+dist
