@@ -12,8 +12,8 @@ To use slskd-python-api, first install it using pip:
 
    (.venv) $ pip install slskd-api
 
-Connect to the sever
---------------------
+Send requests to the server
+---------------------------
 
 Once the module is installed, you can create an instance of slskd client with the following code, 
 granted an API-Key was setup in your `slskd configuration file <https://github.com/slskd/slskd/blob/master/docs/config.md#yaml-18>`_.
