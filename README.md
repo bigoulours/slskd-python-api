@@ -9,9 +9,9 @@ A comprehensive python API could help improve integration and increase slskd ado
  * [headphones](https://github.com/rembo10/headphones) integration
 
 ## Installation
-For the moment, please install manually:
+The package is availaible on [pypi](https://pypi.org/project/slskd-api/):
 ```
-pip install .
+pip install slskd-api
 ```
 
 ## Usage
