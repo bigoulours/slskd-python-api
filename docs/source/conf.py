@@ -15,6 +15,7 @@ extensions = [
     'sphinx.ext.duration',
     'sphinx.ext.doctest',
     'sphinx.ext.autodoc',
+    'sphinx_autodoc_typehints',
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
 ]
@@ -29,7 +30,12 @@ templates_path = ['_templates']
 
 add_module_names = False
 
-# -- Options for HTML output
+# autodoc_typehints="none"
+# typehints_document_rtype = False
+typehints_use_rtype = False
+typehints_use_signature = True
+#typehints_use_signature_return = True
 
+# -- Options for HTML output
 html_theme = 'sphinx_rtd_theme'
 

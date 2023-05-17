@@ -17,6 +17,7 @@ setup(
     project_urls={
         'Documentation': 'https://slskd-api.readthedocs.io',
         'Source': 'https://github.com/bigoulours/slskd-python-api',
+        'Funding': 'https://liberapay.com/bigoulours/donate'
     },
     author='bigoulours',
     description = 'API Wrapper to interact with slskd',

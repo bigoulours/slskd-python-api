@@ -5,7 +5,7 @@ class ApplicationApi(BaseApi):
     This class contains the methods to interact with the Application API.
     """
 
-    def state(self):
+    def state(self) -> dict:
         """
         Gets the current state of the application.
         """
@@ -14,25 +14,27 @@ class ApplicationApi(BaseApi):
         return response.json()
     
 
-    def stop(self):
-        """
-        Stops the application.
-        """
-        url = self.api_url + '/application'
-        response = requests.delete(url, headers=self.header)
-        return response.json()
+# Getting Error 'Unauthorized' even with admin API-Key:
+    # def stop(self):
+    #     """
+    #     Stops the application.
+    #     """
+    #     url = self.api_url + '/application'
+    #     response = requests.delete(url, headers=self.header)
+    #     return response.ok
     
 
-    def restart(self):
-        """
-        Restarts the application.
-        """
-        url = self.api_url + '/application'
-        response = requests.put(url, headers=self.header)
-        return response.json()
+# Getting Error 'Unauthorized' even with admin API-Key:
+    # def restart(self):
+    #     """
+    #     Restarts the application.
+    #     """
+    #     url = self.api_url + '/application'
+    #     response = requests.put(url, headers=self.header)
+    #     return response.json()
     
 
-    def version(self):
+    def version(self) -> str:
         """
         Gets the current application version.
         """
@@ -41,7 +43,7 @@ class ApplicationApi(BaseApi):
         return response.json()
     
 
-    def check_updates(self, forceCheck=False):
+    def check_updates(self, forceCheck: bool = False) -> dict:
         """
         Checks for updates.
         """
@@ -53,18 +55,20 @@ class ApplicationApi(BaseApi):
         return response.json()
     
 
-    def gc(self):
+    def gc(self) -> bool:
         """
         Forces garbage collection.
+
+        :return: True if successful.
         """
         url = self.api_url + '/application/gc'
         response = requests.post(url, headers=self.header)
-        return response.json()
+        return response.ok
     
     
-    # def application_dump(self):
+# Getting error 'Could not find file...':
+    # def dump(self):
     #     """
-    #     Returns error 'Could not find file...'
     #     """
     #     url = self.api_url + '/application/dump'
     #     response = requests.get(url, headers=self.header)

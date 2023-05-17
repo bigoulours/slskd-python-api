@@ -56,7 +56,7 @@ class MetricsApi:
             'Authorization': f'Basic {basic_auth.decode()}' 
         }
 
-    def get(self):
+    def get(self) -> str:
         """
         Gets the Prometheus metrics as text.
         """
