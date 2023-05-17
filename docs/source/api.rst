@@ -10,67 +10,79 @@ _________
 .. autoclass:: slskd_api.MetricsApi
    :members:
 
-application.py
+apis/application.py
 ______________
 
 .. autoclass:: slskd_api.apis.ApplicationApi
    :members:
 
-conversations.py
+apis/conversations.py
 ______________
 
 .. autoclass:: slskd_api.apis.ConversationsApi
    :members:
 
-logs.py
+apis/logs.py
 ______________
 
 .. autoclass:: slskd_api.apis.LogsApi
    :members:
 
-options.py
+apis/options.py
 ______________
 
 .. autoclass:: slskd_api.apis.OptionsApi
    :members:
 
-rooms.py
+apis/public_chat.py
+______________
+
+.. autoclass:: slskd_api.apis.PublicChatApi
+   :members:
+
+apis/relay.py
+______________
+
+.. autoclass:: slskd_api.apis.RelayApi
+   :members:
+
+apis/rooms.py
 ______________
 
 .. autoclass:: slskd_api.apis.RoomsApi
    :members:
 
-searches.py
+apis/searches.py
 ______________
 
 .. autoclass:: slskd_api.apis.SearchesApi
    :members:
 
-server.py
+apis/server.py
 ______________
 
 .. autoclass:: slskd_api.apis.ServerApi
    :members:
 
-session.py
+apis/session.py
 ______________
 
 .. autoclass:: slskd_api.apis.SessionApi
    :members:
 
-shares.py
+apis/shares.py
 ______________
 
 .. autoclass:: slskd_api.apis.SharesApi
    :members:
 
-transfers.py
+apis/transfers.py
 ______________
 
 .. autoclass:: slskd_api.apis.TransfersApi
    :members:
 
-users.py
+apis/users.py
 ______________
 
 .. autoclass:: slskd_api.apis.UsersApi

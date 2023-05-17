@@ -27,6 +27,8 @@ class SlskdClient:
         self.conversations = ConversationsApi(*base_args)
         self.logs = LogsApi(*base_args)
         self.options = OptionsApi(*base_args)
+        self.public_chat = PublicChatApi(*base_args)
+        self.relay = RelayApi(*base_args)
         self.rooms = RoomsApi(*base_args)
         self.searches = SearchesApi(*base_args)
         self.server = ServerApi(*base_args)

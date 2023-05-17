@@ -2,6 +2,8 @@ from .application import ApplicationApi
 from .conversations import ConversationsApi
 from .logs import LogsApi
 from .options import OptionsApi
+from .public_chat import PublicChatApi
+from .relay import RelayApi
 from .rooms import RoomsApi
 from .searches import SearchesApi
 from .server import ServerApi
@@ -15,6 +17,8 @@ __all__ = (
     'ConversationsApi',
     'LogsApi',
     'OptionsApi',
+    'PublicChatApi',
+    'RelayApi'
     'RoomsApi',
     'SearchesApi',
     'ServerApi',

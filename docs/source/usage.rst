@@ -6,7 +6,7 @@ Usage
 Installation
 ------------
 
-To use slskd-python-api, first install it using pip:
+To use slskd-api, first install it using pip:
 
 .. code-block:: console
 
