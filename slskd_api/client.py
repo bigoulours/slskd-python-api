@@ -44,8 +44,8 @@ class MetricsApi:
     Metrics should be first activated in slskd config file.
     User/pass is independent from the main application and default value (slskd:slskd) should be changed.
     Usage::
-        metrics_conn = slskd_api.MetricsApi(host, metrics_usr='slskd', metrics_pwd='slskd')
-        metrics = metrics_conn.get()
+        metrics_api = slskd_api.MetricsApi(host, metrics_usr='slskd', metrics_pwd='slskd')
+        metrics = metrics_api.get()
     """
 
     def __init__(self, host, metrics_usr=None, metrics_pwd=None, metrics_url_base='/metrics'):

@@ -8,6 +8,7 @@ class SearchesApi(BaseApi):
 
     def search_text(self,
                     searchText,
+                    id=None,
                     fileLimit=10000,
                     filterResponses=True,
                     maximumPeerQueueLength=10,
@@ -19,9 +20,16 @@ class SearchesApi(BaseApi):
         """
         Performs a search for the specified request.
         """
+
         url = self.api_url + '/searches'
+
+        try:
+            id = str(uuid.UUID(id)) # check if given id is a valid uuid
+        except:
+            id = str(uuid.uuid1())  # otherwise generate a new one
+
         data = {
-            "id": str(uuid.uuid1()),
+            "id": id,
             "fileLimit": fileLimit,
             "filterResponses": filterResponses,
             "maximumPeerQueueLength": maximumPeerQueueLength,
@@ -68,7 +76,7 @@ class SearchesApi(BaseApi):
 
     def delete(self, id):
         """
-        Stops the search corresponding to the specified id.
+        Deletes the search corresponding to the specified id.
         """
         url = self.api_url + f'/searches/{id}'
         response = requests.delete(url, headers=self.header)

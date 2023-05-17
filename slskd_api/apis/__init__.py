@@ -18,7 +18,7 @@ __all__ = (
     'LogsApi',
     'OptionsApi',
     'PublicChatApi',
-    'RelayApi'
+    'RelayApi',
     'RoomsApi',
     'SearchesApi',
     'ServerApi',
