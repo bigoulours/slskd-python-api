@@ -22,5 +22,5 @@ setup(
     author='bigoulours',
     description = 'API Wrapper to interact with slskd',
     python_requires='>=3.7',
-    license_files = ('LICENSE.md',),
+    license='GNU Affero General Public License v3.0',
 )
