@@ -1,4 +1,5 @@
 from .base import *
+from typing import Union
 
 class TransfersApi(BaseApi):
     """
@@ -73,13 +74,19 @@ class TransfersApi(BaseApi):
         return response.ok
     
 
-    def enqueue(self, username: str, files):
+    def enqueue(self, username: str, files: list) -> bool:
         """
         Enqueues the specified download.
+
+        :param username: User to download from.
+        :param files: A list of dictionaries in the same form as what's returned 
+            by :py:func:`~slskd_api.apis.SearchesApi.search_responses`:
+            [{'filename': <filename>, 'size': <filesize>}...]
+        :return: True if successful.
         """
         url = self.api_url + f'/transfers/downloads/{username}'
         response = requests.post(url, headers=self.header, json=files)
-        return response.json()
+        return response.ok
     
 
     def get_downloads(self, username: str) -> dict:
@@ -103,9 +110,11 @@ class TransfersApi(BaseApi):
         return response.json()
     
 
-    def get_queue_position(self, username: str, id: str):
+    def get_queue_position(self, username: str, id: str) -> Union[int,str]:
         """
         Gets the download for the specified username matching the specified filename, and requests the current place in the remote queue of the specified download.
+        
+        :return: Queue position or error message
         """
         url = self.api_url + f'/transfers/downloads/{username}/{id}/position'
         response = requests.get(url, headers=self.header)
