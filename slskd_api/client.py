@@ -40,7 +40,7 @@ class SlskdClient:
 
 class MetricsApi:
     """
-    Getting the metrics works with a different end point. Default: <slskd_url>:5030/metrics.
+    Getting the metrics works with a different endpoint. Default: <slskd_url>:5030/metrics.
     Metrics should be first activated in slskd config file.
     User/pass is independent from the main application and default value (slskd:slskd) should be changed.
     Usage::

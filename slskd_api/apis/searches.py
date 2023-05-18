@@ -1,5 +1,6 @@
 from .base import *
 import uuid
+from typing import Optional
 
 class SearchesApi(BaseApi):
     """
@@ -7,18 +8,29 @@ class SearchesApi(BaseApi):
     """
 
     def search_text(self,
-                    searchText,
-                    id=None,
-                    fileLimit=10000,
-                    filterResponses=True,
-                    maximumPeerQueueLength=10,
-                    minimumPeerUploadSpeed=0,
-                    minimumResponseFileCount=1,
-                    responseLimit=500,
-                    searchTimeout=5000 # in ms
-        ):
+                    searchText: str,
+                    id: Optional[str] = None,
+                    fileLimit: int = 10000,
+                    filterResponses: bool = True,
+                    maximumPeerQueueLength: int = 10,
+                    minimumPeerUploadSpeed: int = 100000,
+                    minimumResponseFileCount: int = 1,
+                    responseLimit: int = 500,
+                    searchTimeout: int = 5000
+        ) -> dict:
         """
         Performs a search for the specified request.
+
+        :param searchText: Search query
+        :param id: uuid of the search. One will be generated if None.
+        :param fileLimit: Max number of file results
+        :param filterResponses: Filter unreachable users from the results
+        :param maximumPeerQueueLength: Max queue length
+        :param minimumPeerUploadSpeed: Min upload speed in bit/s
+        :param minimumResponseFileCount: Min number of matching files per user
+        :param responseLimit: Max number of users results
+        :param searchTimeout: Search timeout in ms
+        :return: Info about the search (no results!)
         """
 
         url = self.api_url + '/searches'
@@ -38,13 +50,13 @@ class SearchesApi(BaseApi):
             "responseLimit": responseLimit,
             "searchText": searchText,
             "searchTimeout": searchTimeout,
-            "token": 0
+            "token": 0  # ToDo: understand what it does
         }
         response = requests.post(url, headers=self.header, json=data)
         return response.json()
     
 
-    def get_all(self):
+    def get_all(self) -> list:
         """
         Gets the list of active and completed searches.
         """
@@ -53,9 +65,13 @@ class SearchesApi(BaseApi):
         return response.json()
     
 
-    def state(self, id, includeResponses=False):
+    def state(self, id: str, includeResponses: bool = False) -> dict:
         """
         Gets the state of the search corresponding to the specified id.
+
+        :param id: uuid of the search.
+        :param includeResponses: Include responses (search result list) in the returned dict
+        :return: Info about the search
         """
         url = self.api_url + f'/searches/{id}'
         params = dict(
@@ -65,25 +81,29 @@ class SearchesApi(BaseApi):
         return response.json()
     
 
-    def stop(self, id):
+    def stop(self, id: str) -> bool:
         """
         Stops the search corresponding to the specified id.
+
+        :return: True if successful.
         """
         url = self.api_url + f'/searches/{id}'
         response = requests.put(url, headers=self.header)
         return response.ok
     
 
-    def delete(self, id):
+    def delete(self, id: str):
         """
         Deletes the search corresponding to the specified id.
+
+        :return: True if successful.
         """
         url = self.api_url + f'/searches/{id}'
         response = requests.delete(url, headers=self.header)
         return response.ok
     
 
-    def search_responses(self, id):
+    def search_responses(self, id: str) -> list:
         """
         Gets search responses corresponding to the specified id.
         """
