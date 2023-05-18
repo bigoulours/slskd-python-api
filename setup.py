@@ -22,4 +22,5 @@ setup(
     author='bigoulours',
     description = 'API Wrapper to interact with slskd',
     python_requires='>=3.7',
+    license_files = ('LICENSE.md',),
 )
