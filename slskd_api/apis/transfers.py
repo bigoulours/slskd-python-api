@@ -5,9 +5,11 @@ class TransfersApi(BaseApi):
     This class contains the methods to interact with the Transfers API.
     """
 
-    def cancel_download(self, username, id, remove=False):
+    def cancel_download(self, username: str, id:str, remove: bool = False) -> bool:
         """
         Cancels the specified download.
+
+        :return: True if successful.
         """
         url = self.api_url + f'/transfers/downloads/{username}/{id}'
         params = dict(
@@ -17,7 +19,7 @@ class TransfersApi(BaseApi):
         return response.ok
     
 
-    def get_download(self, username, id):
+    def get_download(self, username: str, id: str) -> dict:
         """
         Gets the specified download.
         """
@@ -26,18 +28,22 @@ class TransfersApi(BaseApi):
         return response.json()
     
 
-    def remove_completed_downloads(self):
+    def remove_completed_downloads(self) -> bool:
         """
         Removes all completed downloads, regardless of whether they failed or succeeded.
+
+        :return: True if successful.
         """
         url = self.api_url + '/transfers/downloads/all/completed'
         response = requests.delete(url, headers=self.header)
         return response.ok
     
 
-    def cancel_upload(self, username, id, remove=False):
+    def cancel_upload(self, username: str, id: str, remove: bool = False) -> bool:
         """
         Cancels the specified upload.
+
+        :return: True if successful.
         """
         url = self.api_url + f'/transfers/uploads/{username}/{id}'
         params = dict(
@@ -47,7 +53,7 @@ class TransfersApi(BaseApi):
         return response.ok
     
 
-    def get_upload(self, username, id):
+    def get_upload(self, username: str, id: str) -> dict:
         """
         Gets the specified upload.
         """
@@ -56,16 +62,18 @@ class TransfersApi(BaseApi):
         return response.json()
     
 
-    def remove_completed_uploads(self):
+    def remove_completed_uploads(self) -> bool:
         """
         Removes all completed uploads, regardless of whether they failed or succeeded.
+
+        :return: True if successful.
         """
         url = self.api_url + '/transfers/uploads/all/completed'
         response = requests.delete(url, headers=self.header)
         return response.ok
     
 
-    def enqueue(self, username, files):
+    def enqueue(self, username: str, files):
         """
         Enqueues the specified download.
         """
@@ -74,7 +82,7 @@ class TransfersApi(BaseApi):
         return response.json()
     
 
-    def get_downloads(self, username):
+    def get_downloads(self, username: str) -> dict:
         """
         Gets all downloads for the specified username.
         """
@@ -83,7 +91,7 @@ class TransfersApi(BaseApi):
         return response.json()
     
 
-    def get_all_downloads(self, includeRemoved=False):
+    def get_all_downloads(self, includeRemoved: bool = False) -> list:
         """
         Gets all downloads.
         """
@@ -95,7 +103,7 @@ class TransfersApi(BaseApi):
         return response.json()
     
 
-    def get_queue_position(self, username, id):
+    def get_queue_position(self, username: str, id: str):
         """
         Gets the download for the specified username matching the specified filename, and requests the current place in the remote queue of the specified download.
         """
@@ -104,7 +112,7 @@ class TransfersApi(BaseApi):
         return response.json()
     
 
-    def get_all_uploads(self, includeRemoved=False):
+    def get_all_uploads(self, includeRemoved: bool = False) -> list:
         """
         Gets all uploads.
         """
@@ -116,7 +124,7 @@ class TransfersApi(BaseApi):
         return response.json()
     
 
-    def get_uploads(self, username):
+    def get_uploads(self, username: str) -> dict:
         """
         Gets all uploads for the specified username.
         """

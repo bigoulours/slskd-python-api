@@ -12,7 +12,7 @@ class SearchesApi(BaseApi):
                     id: Optional[str] = None,
                     fileLimit: int = 10000,
                     filterResponses: bool = True,
-                    maximumPeerQueueLength: int = 10,
+                    maximumPeerQueueLength: int = 30,
                     minimumPeerUploadSpeed: int = 100000,
                     minimumResponseFileCount: int = 1,
                     responseLimit: int = 500,

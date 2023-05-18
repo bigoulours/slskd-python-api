@@ -15,7 +15,11 @@ class SlskdClient:
         app_status = slskd.application.state()
     """
 
-    def __init__(self, host, api_key, url_base='/'):
+    def __init__(self,
+                 host: str,
+                 api_key: str,
+                 url_base: str = '/'
+    ):
         api_url = reduce(urljoin, [host, f'{url_base}/', f'api/{API_VERSION}'])
         header = {
             'accept': '*/*',
@@ -48,7 +52,12 @@ class MetricsApi:
         metrics = metrics_api.get()
     """
 
-    def __init__(self, host, metrics_usr=None, metrics_pwd=None, metrics_url_base='/metrics'):
+    def __init__(self,
+                 host: str,
+                 metrics_usr: str = 'slskd',
+                 metrics_pwd: str = 'slskd',
+                 metrics_url_base: str = '/metrics'
+    ):
         self.metrics_url = urljoin(host, metrics_url_base)
         basic_auth = b64encode(bytes(f'{metrics_usr}:{metrics_pwd}', 'utf-8'))
         self.header = {

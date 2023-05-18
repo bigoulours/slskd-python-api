@@ -30,6 +30,8 @@ templates_path = ['_templates']
 
 add_module_names = False
 
+autodoc_member_order = 'bysource'
+
 # autodoc_typehints="none"
 # typehints_document_rtype = False
 typehints_use_rtype = False

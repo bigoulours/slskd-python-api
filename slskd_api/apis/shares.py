@@ -5,7 +5,7 @@ class SharesApi(BaseApi):
     This class contains the methods to interact with the Shares API.
     """
 
-    def get_all(self):
+    def get_all(self) -> dict:
         """
         Gets the current list of shares.
         """
@@ -14,25 +14,29 @@ class SharesApi(BaseApi):
         return response.json()
     
 
-    def start_scan(self):
+    def start_scan(self) -> bool:
         """
         Initiates a scan of the configured shares.
+
+        :return: True if successful.
         """
         url = self.api_url + '/shares'
         response = requests.put(url, headers=self.header)
-        return response
+        return response.ok
     
 
-    def cancel_scan(self):
+    def cancel_scan(self) -> bool:
         """
         Cancels a share scan, if one is running.
+
+        :return: True if successful.
         """
         url = self.api_url + '/shares'
         response = requests.delete(url, headers=self.header)
-        return response
+        return response.ok
     
 
-    def get(self, id):
+    def get(self, id: str) -> dict:
         """
         Gets the share associated with the specified id.
         """
@@ -41,7 +45,7 @@ class SharesApi(BaseApi):
         return response.json()
     
 
-    def get_all_contents(self):
+    def all_contents(self) -> list:
         """
         Returns a list of all shared directories and files.
         """
@@ -50,7 +54,7 @@ class SharesApi(BaseApi):
         return response.json()
     
 
-    def get_contents(self, id):
+    def contents(self, id: str) -> list:
         """
         Gets the contents of the share associated with the specified id.
         """
