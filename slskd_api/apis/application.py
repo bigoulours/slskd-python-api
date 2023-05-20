@@ -14,24 +14,26 @@ class ApplicationApi(BaseApi):
         return response.json()
     
 
-# Getting Error 'Unauthorized' even with admin API-Key:
-    # def stop(self):
-    #     """
-    #     Stops the application.
-    #     """
-    #     url = self.api_url + '/application'
-    #     response = requests.delete(url, headers=self.header)
-    #     return response.ok
+    def stop(self) -> bool:
+        """
+        Stops the application. Only works with token (usr/pwd login). 'Unauthorized' with API-Key.
+        
+        :return: True if successful.
+        """
+        url = self.api_url + '/application'
+        response = requests.delete(url, headers=self.header)
+        return response.ok
     
 
-# Getting Error 'Unauthorized' even with admin API-Key:
-    # def restart(self):
-    #     """
-    #     Restarts the application.
-    #     """
-    #     url = self.api_url + '/application'
-    #     response = requests.put(url, headers=self.header)
-    #     return response.json()
+    def restart(self) -> bool:
+        """
+        Restarts the application. Only works with token (usr/pwd login). 'Unauthorized' with API-Key.
+        
+        :return: True if successful.
+        """
+        url = self.api_url + '/application'
+        response = requests.put(url, headers=self.header)
+        return response.ok
     
 
     def version(self) -> str:

@@ -23,7 +23,7 @@ class OptionsApi(BaseApi):
         return response.json()
 
   
-# Getting error 'Unauthorized':
+# Getting error 'Unauthorized'(API-Key) or 'Forbidden' (token):
     # def get_debug(self) -> dict:
     #     """
     #     Gets the debug view of the current application options.

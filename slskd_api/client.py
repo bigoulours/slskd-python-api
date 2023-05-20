@@ -10,6 +10,7 @@ class SlskdClient:
     """
     The main class that allows access to the different APIs of a slskd instance.
     An API-Key with appropriate permissions (`readwrite` for most use cases) must be set in slskd config file.
+    Alternatively, provide your username and password.
     Usage::
         slskd = slskd_api.SlskdClient(host, api_key, url_base)
         app_status = slskd.application.state()
@@ -17,14 +18,23 @@ class SlskdClient:
 
     def __init__(self,
                  host: str,
-                 api_key: str,
-                 url_base: str = '/'
+                 api_key: str = None,
+                 url_base: str = '/',
+                 username: str = None,
+                 password: str = None,
     ):
         api_url = reduce(urljoin, [host, f'{url_base}/', f'api/{API_VERSION}'])
-        header = {
-            'accept': '*/*',
-            'X-API-Key': api_key
-        }
+     
+        header = {'accept': '*/*'}
+
+        if api_key:
+            header['X-API-Key'] = api_key
+        elif username and password:
+            header['Authorization'] = 'Bearer ' + \
+                            SessionApi(api_url, header).login(username, password)['token']
+        else:
+            raise ValueError('Please provide an API-Key or a valid username/password pair.')
+        
         base_args = (api_url, header)
         
         self.application = ApplicationApi(*base_args)
