@@ -68,10 +68,9 @@ class ApplicationApi(BaseApi):
         return response.ok
     
     
-# Getting error 'Could not find file...':
+# Not supposed to be part of the external API
+# More info in the Github discussion: https://github.com/slskd/slskd/discussions/910
     # def dump(self):
-    #     """
-    #     """
     #     url = self.api_url + '/application/dump'
     #     response = requests.get(url, headers=self.header)
     #     return response.json()

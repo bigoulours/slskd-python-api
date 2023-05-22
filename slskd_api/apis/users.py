@@ -23,14 +23,15 @@ class UsersApi(BaseApi):
         return response.json()
     
 
-# Getting Error 404 'Not Found' 
-    # def browsing_status(self, username: str):
-    #     """
-    #     Retrieves the status of the current browse operation for the specified username, if any.
-    #     """
-    #     url = self.api_url + f'/users/{username}/browse/status'
-    #     response = requests.get(url, headers=self.header)
-    #     return response.json()
+    def browsing_status(self, username: str):
+        """
+        Retrieves the status of the current browse operation for the specified username, if any.
+        Will return error 404 if called after the browsing operation has ended.
+        Best called asynchronously while :py:func:`browse` is still running.
+        """
+        url = self.api_url + f'/users/{username}/browse/status'
+        response = requests.get(url, headers=self.header)
+        return response.json()
     
 
     def directory(self, username: str, directory: str) -> dict:
