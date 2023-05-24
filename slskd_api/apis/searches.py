@@ -65,7 +65,6 @@ class SearchesApi(BaseApi):
             "responseLimit": responseLimit,
             "searchText": searchText,
             "searchTimeout": searchTimeout,
-            "token": 0  # ToDo: understand what it does
         }
         response = requests.post(url, headers=self.header, json=data)
         return response.json()
