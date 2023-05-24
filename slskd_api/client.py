@@ -37,6 +37,7 @@ class SlskdClient:
                  url_base: str = '/',
                  username: str = None,
                  password: str = None,
+                 token: str = None,
     ):
         api_url = reduce(urljoin, [host, f'{url_base}/', f'api/{API_VERSION}'])
      
@@ -47,8 +48,10 @@ class SlskdClient:
         elif username and password:
             header['Authorization'] = 'Bearer ' + \
                             SessionApi(api_url, header).login(username, password)['token']
+        elif token:
+            header['Authorization'] = 'Bearer ' + token
         else:
-            raise ValueError('Please provide an API-Key or a valid username/password pair.')
+            raise ValueError('Please provide an API-Key, a valid token or username/password.')
         
         base_args = (api_url, header)
         
