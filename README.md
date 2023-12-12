@@ -1,12 +1,12 @@
 # slskd-api
 
 ## Goal
-This project aims at providing a python API for [slskd](https://github.com/slskd/slskd).
+This project provides a python API for [slskd](https://github.com/slskd/slskd).
 
-A comprehensive python API could help improve integration and increase slskd adoption by enabling rapid development of various software, such as:
- * Desktop/Mobile Clients
- * [beets](https://github.com/beetbox/beets) plugin(s)
- * [headphones](https://github.com/rembo10/headphones) integration
+A comprehensive python API should help improve integration and increase slskd adoption by enabling rapid development of various software, such as:
+ - [ ] Desktop/Mobile Clients
+ - [ ] [beets](https://github.com/beetbox/beets) plugin(s)
+ - [ ] [headphones](https://github.com/rembo10/headphones) integration
 
 ## Installation
 The package is availaible on [pypi](https://pypi.org/project/slskd-api/):
