@@ -39,7 +39,7 @@ class SlskdClient:
                  password: str = None,
                  token: str = None,
     ):
-        api_url = reduce(urljoin, [host, f'{url_base}/', f'api/{API_VERSION}'])
+        api_url = reduce(urljoin, [f'{host}/', f'{url_base}/', f'api/{API_VERSION}'])
      
         header = {'accept': '*/*'}
 
