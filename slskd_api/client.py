@@ -47,7 +47,7 @@ class SlskdClient:
             header['X-API-Key'] = api_key
         elif username and password:
             header['Authorization'] = 'Bearer ' + \
-                            SessionApi(api_url, header).login(username, password)['token']
+                            SessionApi(api_url, header).login(username, password).get('token', '')
         elif token:
             header['Authorization'] = 'Bearer ' + token
         else:
