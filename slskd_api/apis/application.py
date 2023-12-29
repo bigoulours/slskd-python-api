@@ -25,7 +25,7 @@ class ApplicationApi(BaseApi):
         Gets the current state of the application.
         """
         url = self.api_url + '/application'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -36,7 +36,7 @@ class ApplicationApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + '/application'
-        response = requests.delete(url, headers=self.header)
+        response = self.session.delete(url)
         return response.ok
     
 
@@ -47,7 +47,7 @@ class ApplicationApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + '/application'
-        response = requests.put(url, headers=self.header)
+        response = self.session.put(url)
         return response.ok
     
 
@@ -56,7 +56,7 @@ class ApplicationApi(BaseApi):
         Gets the current application version.
         """
         url = self.api_url + '/application/version'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -68,7 +68,7 @@ class ApplicationApi(BaseApi):
         params = dict(
             forceCheck=forceCheck
         )
-        response = requests.get(url, headers=self.header, params=params)
+        response = self.session.get(url, params=params)
         return response.json()
     
 
@@ -79,7 +79,7 @@ class ApplicationApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + '/application/gc'
-        response = requests.post(url, headers=self.header)
+        response = self.session.post(url)
         return response.ok
     
     
@@ -87,5 +87,5 @@ class ApplicationApi(BaseApi):
 # More info in the Github discussion: https://github.com/slskd/slskd/discussions/910
     # def dump(self):
     #     url = self.api_url + '/application/dump'
-    #     response = requests.get(url, headers=self.header)
+    #     response = self.session.get(url)
     #     return response.json()

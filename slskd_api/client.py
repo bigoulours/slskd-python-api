@@ -25,7 +25,7 @@ class SlskdClient:
     """
     The main class that allows access to the different APIs of a slskd instance.
     An API-Key with appropriate permissions (`readwrite` for most use cases) must be set in slskd config file.
-    Alternatively, provide your username and password.
+    Alternatively, provide your username and password. Requests error status raise corresponding error.
     Usage::
         slskd = slskd_api.SlskdClient(host, api_key, url_base)
         app_status = slskd.application.state()
@@ -40,20 +40,26 @@ class SlskdClient:
                  token: str = None,
     ):
         api_url = reduce(urljoin, [f'{host}/', f'{url_base}/', f'api/{API_VERSION}'])
-     
-        header = {'accept': '*/*'}
+
+        session = requests.Session()
+        session.hooks = {'response': lambda r, *args, **kwargs: r.raise_for_status()}
+        session.headers.update({'accept': '*/*'})
+
+        header = {}
 
         if api_key:
             header['X-API-Key'] = api_key
         elif username and password:
             header['Authorization'] = 'Bearer ' + \
-                            SessionApi(api_url, header).login(username, password).get('token', '')
+                            SessionApi(api_url, session).login(username, password).get('token', '')
         elif token:
             header['Authorization'] = 'Bearer ' + token
         else:
             raise ValueError('Please provide an API-Key, a valid token or username/password.')
         
-        base_args = (api_url, header)
+        session.headers.update(header)
+
+        base_args = (api_url, session)
         
         self.application = ApplicationApi(*base_args)
         self.conversations = ConversationsApi(*base_args)

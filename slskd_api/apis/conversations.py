@@ -27,7 +27,7 @@ class ConversationsApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + f'/conversations/{username}/{id}'
-        response = requests.put(url, headers=self.header)
+        response = self.session.put(url)
         return response.ok
     
 
@@ -38,7 +38,7 @@ class ConversationsApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + f'/conversations/{username}'
-        response = requests.put(url, headers=self.header)
+        response = self.session.put(url)
         return response.ok
     
 
@@ -49,7 +49,7 @@ class ConversationsApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + f'/conversations/{username}'
-        response = requests.delete(url, headers=self.header)
+        response = self.session.delete(url)
         return response.ok
     
 
@@ -61,7 +61,7 @@ class ConversationsApi(BaseApi):
         params = dict(
             includeMessages=includeMessages
         )
-        response = requests.get(url, headers=self.header, params=params)
+        response = self.session.get(url, params=params)
         return response.json()
     
 
@@ -72,7 +72,7 @@ class ConversationsApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + f'/conversations/{username}'
-        response = requests.post(url, headers=self.header, json=message)
+        response = self.session.post(url, json=message)
         return response.ok
     
 
@@ -85,7 +85,7 @@ class ConversationsApi(BaseApi):
             includeInactive=includeInactive,
             unAcknowledgedOnly=unAcknowledgedOnly
         )
-        response = requests.get(url, headers=self.header, params=params)
+        response = self.session.get(url, params=params)
         return response.json()
     
 
@@ -98,6 +98,6 @@ class ConversationsApi(BaseApi):
             username=username,
             unAcknowledgedOnly=unAcknowledgedOnly
         )
-        response = requests.get(url, headers=self.header, params=params)
+        response = self.session.get(url, params=params)
         return response.json()
     

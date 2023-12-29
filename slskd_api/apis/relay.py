@@ -27,7 +27,7 @@ class RelayApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + '/relay/agent'
-        response = requests.put(url, headers=self.header)
+        response = self.session.put(url)
         return response.ok
     
 
@@ -38,7 +38,7 @@ class RelayApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + '/relay/agent'
-        response = requests.delete(url, headers=self.header)
+        response = self.session.delete(url)
         return response.ok
     
 
@@ -49,7 +49,7 @@ class RelayApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + f'/relay/controller/downloads/{token}'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.ok
     
 
@@ -60,7 +60,7 @@ class RelayApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + f'/relay/controller/files/{token}'
-        response = requests.post(url, headers=self.header)
+        response = self.session.post(url)
         return response.ok
     
 
@@ -71,5 +71,5 @@ class RelayApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + f'/relay/controller/shares/{token}'
-        response = requests.post(url, headers=self.header)
+        response = self.session.post(url)
         return response.ok

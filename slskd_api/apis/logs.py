@@ -25,5 +25,5 @@ class LogsApi(BaseApi):
         Gets the last few application logs.
         """
         url = self.api_url + '/logs'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()

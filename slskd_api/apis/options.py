@@ -25,7 +25,7 @@ class OptionsApi(BaseApi):
         Gets the current application options.
         """
         url = self.api_url + '/options'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -34,7 +34,7 @@ class OptionsApi(BaseApi):
         Gets the application options provided at startup.
         """
         url = self.api_url + '/options/startup'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
 
   
@@ -45,7 +45,7 @@ class OptionsApi(BaseApi):
         Only works with token (usr/pwd login). 'Unauthorized' with API-Key.
         """
         url = self.api_url + '/options/debug'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
 
 
@@ -55,7 +55,7 @@ class OptionsApi(BaseApi):
         Only works with token (usr/pwd login). 'Unauthorized' with API-Key.
         """
         url = self.api_url + '/options/yaml/location'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -65,7 +65,7 @@ class OptionsApi(BaseApi):
         Only works with token (usr/pwd login). 'Unauthorized' with API-Key.
         """
         url = self.api_url + '/options/yaml'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -77,7 +77,7 @@ class OptionsApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + '/options/yaml'
-        response = requests.post(url, headers=self.header, json=yaml_content)
+        response = self.session.post(url, json=yaml_content)
         return response.ok
     
 
@@ -89,5 +89,5 @@ class OptionsApi(BaseApi):
         :return: Empty string if validation successful. Error message otherwise.
         """
         url = self.api_url + '/options/yaml/validate'
-        response = requests.post(url, headers=self.header, json=yaml_content)
+        response = self.session.post(url, json=yaml_content)
         return response.text

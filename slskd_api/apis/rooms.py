@@ -27,7 +27,7 @@ class RoomsApi(BaseApi):
         :return: Names of the joined rooms.
         """
         url = self.api_url + '/rooms/joined'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -38,7 +38,7 @@ class RoomsApi(BaseApi):
         :return: room info: name, isPrivate, users, messages
         """
         url = self.api_url + '/rooms/joined'
-        response = requests.post(url, headers=self.header, json=roomName)
+        response = self.session.post(url, json=roomName)
         return response.json()
 
 
@@ -49,7 +49,7 @@ class RoomsApi(BaseApi):
         :return: room info: name, isPrivate, users, messages
         """
         url = self.api_url + f'/rooms/joined/{roomName}'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -60,7 +60,7 @@ class RoomsApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + f'/rooms/joined/{roomName}'
-        response = requests.delete(url, headers=self.header)
+        response = self.session.delete(url)
         return response.ok
     
 
@@ -71,7 +71,7 @@ class RoomsApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + f'/rooms/joined/{roomName}/messages'
-        response = requests.post(url, headers=self.header, json=message)
+        response = self.session.post(url, json=message)
         return response.ok
 
 
@@ -80,7 +80,7 @@ class RoomsApi(BaseApi):
         Gets the current list of messages for the specified room.
         """
         url = self.api_url + f'/rooms/joined/{roomName}/messages'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
 
 
@@ -91,7 +91,7 @@ class RoomsApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + f'/rooms/joined/{roomName}/ticker'
-        response = requests.post(url, headers=self.header, json=ticker)
+        response = self.session.post(url, json=ticker)
         return response.ok
     
 
@@ -102,7 +102,7 @@ class RoomsApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + f'/rooms/joined/{roomName}/members'
-        response = requests.post(url, headers=self.header, json=username)
+        response = self.session.post(url, json=username)
         return response.ok
     
 
@@ -111,7 +111,7 @@ class RoomsApi(BaseApi):
         Gets the current list of users for the specified joined room.
         """
         url = self.api_url + f'/rooms/joined/{roomName}/users'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -120,5 +120,5 @@ class RoomsApi(BaseApi):
         Gets a list of rooms from the server.
         """
         url = self.api_url + '/rooms/available'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()

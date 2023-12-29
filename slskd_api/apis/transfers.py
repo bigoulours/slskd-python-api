@@ -31,7 +31,7 @@ class TransfersApi(BaseApi):
         params = dict(
             remove=remove
         )
-        response = requests.delete(url, headers=self.header, params=params)
+        response = self.session.delete(url, params=params)
         return response.ok
     
 
@@ -40,7 +40,7 @@ class TransfersApi(BaseApi):
         Gets the specified download.
         """
         url = self.api_url + f'/transfers/downloads/{username}/{id}'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -51,7 +51,7 @@ class TransfersApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + '/transfers/downloads/all/completed'
-        response = requests.delete(url, headers=self.header)
+        response = self.session.delete(url)
         return response.ok
     
 
@@ -65,7 +65,7 @@ class TransfersApi(BaseApi):
         params = dict(
             remove=remove
         )
-        response = requests.delete(url, headers=self.header, params=params)
+        response = self.session.delete(url, params=params)
         return response.ok
     
 
@@ -74,7 +74,7 @@ class TransfersApi(BaseApi):
         Gets the specified upload.
         """
         url = self.api_url + f'/transfers/uploads/{username}/{id}'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -85,7 +85,7 @@ class TransfersApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + '/transfers/uploads/all/completed'
-        response = requests.delete(url, headers=self.header)
+        response = self.session.delete(url)
         return response.ok
     
 
@@ -100,7 +100,7 @@ class TransfersApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + f'/transfers/downloads/{username}'
-        response = requests.post(url, headers=self.header, json=files)
+        response = self.session.post(url, json=files)
         return response.ok
     
 
@@ -109,7 +109,7 @@ class TransfersApi(BaseApi):
         Gets all downloads for the specified username.
         """
         url = self.api_url + f'/transfers/downloads/{username}'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -121,7 +121,7 @@ class TransfersApi(BaseApi):
         params = dict(
             includeRemoved=includeRemoved
         )
-        response = requests.get(url, headers=self.header, params=params)
+        response = self.session.get(url, params=params)
         return response.json()
     
 
@@ -132,7 +132,7 @@ class TransfersApi(BaseApi):
         :return: Queue position or error message
         """
         url = self.api_url + f'/transfers/downloads/{username}/{id}/position'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -144,7 +144,7 @@ class TransfersApi(BaseApi):
         params = dict(
             includeRemoved=includeRemoved
         )
-        response = requests.get(url, headers=self.header, params=params)
+        response = self.session.get(url, params=params)
         return response.json()
     
 
@@ -153,5 +153,5 @@ class TransfersApi(BaseApi):
         Gets all uploads for the specified username.
         """
         url = self.api_url + f'/transfers/uploads/{username}'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()

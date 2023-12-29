@@ -27,7 +27,7 @@ class ServerApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + '/server'
-        response = requests.put(url, headers=self.header)
+        response = self.session.put(url)
         return response.ok
     
 
@@ -38,7 +38,7 @@ class ServerApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + '/server'
-        response = requests.delete(url, headers=self.header, json='')
+        response = self.session.delete(url, json='')
         return response.ok
     
 
@@ -47,5 +47,5 @@ class ServerApi(BaseApi):
         Retrieves the current state of the server.
         """
         url = self.api_url + '/server'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()

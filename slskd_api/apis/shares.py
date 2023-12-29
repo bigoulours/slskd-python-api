@@ -25,7 +25,7 @@ class SharesApi(BaseApi):
         Gets the current list of shares.
         """
         url = self.api_url + '/shares'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -36,7 +36,7 @@ class SharesApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + '/shares'
-        response = requests.put(url, headers=self.header)
+        response = self.session.put(url)
         return response.ok
     
 
@@ -47,7 +47,7 @@ class SharesApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + '/shares'
-        response = requests.delete(url, headers=self.header)
+        response = self.session.delete(url)
         return response.ok
     
 
@@ -56,7 +56,7 @@ class SharesApi(BaseApi):
         Gets the share associated with the specified id.
         """
         url = self.api_url + f'/shares/{id}'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -65,7 +65,7 @@ class SharesApi(BaseApi):
         Returns a list of all shared directories and files.
         """
         url = self.api_url + '/shares/contents'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -74,5 +74,5 @@ class SharesApi(BaseApi):
         Gets the contents of the share associated with the specified id.
         """
         url = self.api_url + f'/shares/{id}/contents'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()

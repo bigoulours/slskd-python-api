@@ -27,7 +27,7 @@ class PublicChatApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + '/publicchat'
-        response = requests.post(url, headers=self.header)
+        response = self.session.post(url)
         return response.ok
     
 
@@ -38,5 +38,5 @@ class PublicChatApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + '/publicchat'
-        response = requests.delete(url, headers=self.header)
+        response = self.session.delete(url)
         return response.ok

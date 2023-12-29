@@ -25,7 +25,7 @@ class SessionApi(BaseApi):
         Checks whether the provided authentication is valid.
         """
         url = self.api_url + '/session'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.ok
     
 
@@ -40,7 +40,7 @@ class SessionApi(BaseApi):
             'username': username,
             'password': password
         }
-        response = requests.post(url, headers=self.header, json=data)
+        response = self.session.post(url, json=data)
         return response.json()
     
 
@@ -49,5 +49,5 @@ class SessionApi(BaseApi):
         Checks whether security is enabled.
         """
         url = self.api_url + '/session/enabled'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()

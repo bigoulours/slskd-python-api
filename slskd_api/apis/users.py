@@ -25,7 +25,7 @@ class UsersApi(BaseApi):
         Retrieves the address of the specified username.
         """
         url = self.api_url + f'/users/{username}/endpoint'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -34,18 +34,18 @@ class UsersApi(BaseApi):
         Retrieves the files shared by the specified username.
         """
         url = self.api_url + f'/users/{username}/browse'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
-    def browsing_status(self, username: str):
+    def browsing_status(self, username: str) -> dict:
         """
         Retrieves the status of the current browse operation for the specified username, if any.
         Will return error 404 if called after the browsing operation has ended.
         Best called asynchronously while :py:func:`browse` is still running.
         """
         url = self.api_url + f'/users/{username}/browse/status'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -57,7 +57,7 @@ class UsersApi(BaseApi):
         data = {
             "directory": directory
         }
-        response = requests.post(url, headers=self.header, json=data)
+        response = self.session.post(url, json=data)
         return response.json()
     
 
@@ -66,7 +66,7 @@ class UsersApi(BaseApi):
         Retrieves information about the specified username.
         """
         url = self.api_url + f'/users/{username}/info'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -75,5 +75,5 @@ class UsersApi(BaseApi):
         Retrieves status for the specified username.
         """
         url = self.api_url + f'/users/{username}/status'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()

@@ -66,7 +66,7 @@ class SearchesApi(BaseApi):
             "searchText": searchText,
             "searchTimeout": searchTimeout,
         }
-        response = requests.post(url, headers=self.header, json=data)
+        response = self.session.post(url, json=data)
         return response.json()
     
 
@@ -75,7 +75,7 @@ class SearchesApi(BaseApi):
         Gets the list of active and completed searches.
         """
         url = self.api_url + '/searches'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
     
 
@@ -91,7 +91,7 @@ class SearchesApi(BaseApi):
         params = dict(
             includeResponses=includeResponses
         )
-        response = requests.get(url, headers=self.header, params=params)
+        response = self.session.get(url, params=params)
         return response.json()
     
 
@@ -102,7 +102,7 @@ class SearchesApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + f'/searches/{id}'
-        response = requests.put(url, headers=self.header)
+        response = self.session.put(url)
         return response.ok
     
 
@@ -113,7 +113,7 @@ class SearchesApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + f'/searches/{id}'
-        response = requests.delete(url, headers=self.header)
+        response = self.session.delete(url)
         return response.ok
     
 
@@ -122,5 +122,5 @@ class SearchesApi(BaseApi):
         Gets search responses corresponding to the specified id.
         """
         url = self.api_url + f'/searches/{id}/responses'
-        response = requests.get(url, headers=self.header)
+        response = self.session.get(url)
         return response.json()
