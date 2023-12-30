@@ -38,12 +38,14 @@ class SlskdClient:
                  username: str = None,
                  password: str = None,
                  token: str = None,
+                 verify_ssl: bool = True
     ):
         api_url = reduce(urljoin, [f'{host}/', f'{url_base}/', f'api/{API_VERSION}'])
 
         session = requests.Session()
         session.hooks = {'response': lambda r, *args, **kwargs: r.raise_for_status()}
         session.headers.update({'accept': '*/*'})
+        session.verify = verify_ssl
 
         header = {}
 
