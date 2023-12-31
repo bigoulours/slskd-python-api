@@ -17,7 +17,7 @@ from .base import *
 
 class ServerApi(BaseApi):
     """
-    This class contains the methods to interact with the Search API.
+    This class contains the methods to interact with the Server API.
     """
 
     def connect(self) -> bool:
