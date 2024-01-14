@@ -21,6 +21,17 @@ from functools import reduce
 from base64 import b64encode
 from slskd_api.apis import *
 
+
+class HTTPAdapterTimeout(requests.adapters.HTTPAdapter):
+    def __init__(self, timeout=None, **kwargs):
+        super().__init__(**kwargs)
+        self.timeout = timeout
+
+    def send(self, *args, **kwargs):
+        kwargs['timeout'] = self.timeout
+        return super().send(*args, **kwargs)
+
+
 class SlskdClient:
     """
     The main class that allows access to the different APIs of a slskd instance.
@@ -38,11 +49,14 @@ class SlskdClient:
                  username: str = None,
                  password: str = None,
                  token: str = None,
-                 verify_ssl: bool = True
+                 verify_ssl: bool = True,
+                 timeout: float = None  # requests timeout in seconds
     ):
         api_url = reduce(urljoin, [f'{host}/', f'{url_base}/', f'api/{API_VERSION}'])
 
         session = requests.Session()
+        session.adapters['http://'] = HTTPAdapterTimeout(timeout=timeout)
+        session.adapters['https://'] = HTTPAdapterTimeout(timeout=timeout)
         session.hooks = {'response': lambda r, *args, **kwargs: r.raise_for_status()}
         session.headers.update({'accept': '*/*'})
         session.verify = verify_ssl
