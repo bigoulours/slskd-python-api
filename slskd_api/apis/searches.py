@@ -27,11 +27,11 @@ class SearchesApi(BaseApi):
                     id: Optional[str] = None,
                     fileLimit: int = 10000,
                     filterResponses: bool = True,
-                    maximumPeerQueueLength: int = 30,
-                    minimumPeerUploadSpeed: int = 100000,
+                    maximumPeerQueueLength: int = 1000000,
+                    minimumPeerUploadSpeed: int = 0,
                     minimumResponseFileCount: int = 1,
-                    responseLimit: int = 500,
-                    searchTimeout: int = 5000
+                    responseLimit: int = 100,
+                    searchTimeout: int = 15000
         ) -> dict:
         """
         Performs a search for the specified request.
