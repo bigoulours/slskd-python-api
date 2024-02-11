@@ -48,7 +48,7 @@ class RoomsApi(BaseApi):
 
         :return: room info: name, isPrivate, users, messages
         """
-        url = self.api_url + f'/rooms/joined/{roomName}'
+        url = self.api_url + f'/rooms/joined/{quote(roomName)}'
         response = self.session.get(url)
         return response.json()
     
@@ -59,7 +59,7 @@ class RoomsApi(BaseApi):
 
         :return: True if successful.
         """
-        url = self.api_url + f'/rooms/joined/{roomName}'
+        url = self.api_url + f'/rooms/joined/{quote(roomName)}'
         response = self.session.delete(url)
         return response.ok
     
@@ -70,7 +70,7 @@ class RoomsApi(BaseApi):
 
         :return: True if successful.
         """
-        url = self.api_url + f'/rooms/joined/{roomName}/messages'
+        url = self.api_url + f'/rooms/joined/{quote(roomName)}/messages'
         response = self.session.post(url, json=message)
         return response.ok
 
@@ -79,7 +79,7 @@ class RoomsApi(BaseApi):
         """
         Gets the current list of messages for the specified room.
         """
-        url = self.api_url + f'/rooms/joined/{roomName}/messages'
+        url = self.api_url + f'/rooms/joined/{quote(roomName)}/messages'
         response = self.session.get(url)
         return response.json()
 
@@ -90,7 +90,7 @@ class RoomsApi(BaseApi):
 
         :return: True if successful.
         """
-        url = self.api_url + f'/rooms/joined/{roomName}/ticker'
+        url = self.api_url + f'/rooms/joined/{quote(roomName)}/ticker'
         response = self.session.post(url, json=ticker)
         return response.ok
     
@@ -101,7 +101,7 @@ class RoomsApi(BaseApi):
 
         :return: True if successful.
         """
-        url = self.api_url + f'/rooms/joined/{roomName}/members'
+        url = self.api_url + f'/rooms/joined/{quote(roomName)}/members'
         response = self.session.post(url, json=username)
         return response.ok
     
@@ -110,7 +110,7 @@ class RoomsApi(BaseApi):
         """
         Gets the current list of users for the specified joined room.
         """
-        url = self.api_url + f'/rooms/joined/{roomName}/users'
+        url = self.api_url + f'/rooms/joined/{quote(roomName)}/users'
         response = self.session.get(url)
         return response.json()
     

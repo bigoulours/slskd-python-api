@@ -27,7 +27,7 @@ class TransfersApi(BaseApi):
 
         :return: True if successful.
         """
-        url = self.api_url + f'/transfers/downloads/{username}/{id}'
+        url = self.api_url + f'/transfers/downloads/{quote(username)}/{id}'
         params = dict(
             remove=remove
         )
@@ -39,7 +39,7 @@ class TransfersApi(BaseApi):
         """
         Gets the specified download.
         """
-        url = self.api_url + f'/transfers/downloads/{username}/{id}'
+        url = self.api_url + f'/transfers/downloads/{quote(username)}/{id}'
         response = self.session.get(url)
         return response.json()
     
@@ -61,7 +61,7 @@ class TransfersApi(BaseApi):
 
         :return: True if successful.
         """
-        url = self.api_url + f'/transfers/uploads/{username}/{id}'
+        url = self.api_url + f'/transfers/uploads/{quote(username)}/{id}'
         params = dict(
             remove=remove
         )
@@ -73,7 +73,7 @@ class TransfersApi(BaseApi):
         """
         Gets the specified upload.
         """
-        url = self.api_url + f'/transfers/uploads/{username}/{id}'
+        url = self.api_url + f'/transfers/uploads/{quote(username)}/{id}'
         response = self.session.get(url)
         return response.json()
     
@@ -99,7 +99,7 @@ class TransfersApi(BaseApi):
             [{'filename': <filename>, 'size': <filesize>}...]
         :return: True if successful.
         """
-        url = self.api_url + f'/transfers/downloads/{username}'
+        url = self.api_url + f'/transfers/downloads/{quote(username)}'
         response = self.session.post(url, json=files)
         return response.ok
     
@@ -108,7 +108,7 @@ class TransfersApi(BaseApi):
         """
         Gets all downloads for the specified username.
         """
-        url = self.api_url + f'/transfers/downloads/{username}'
+        url = self.api_url + f'/transfers/downloads/{quote(username)}'
         response = self.session.get(url)
         return response.json()
     
@@ -131,7 +131,7 @@ class TransfersApi(BaseApi):
         
         :return: Queue position or error message
         """
-        url = self.api_url + f'/transfers/downloads/{username}/{id}/position'
+        url = self.api_url + f'/transfers/downloads/{quote(username)}/{id}/position'
         response = self.session.get(url)
         return response.json()
     
@@ -152,6 +152,6 @@ class TransfersApi(BaseApi):
         """
         Gets all uploads for the specified username.
         """
-        url = self.api_url + f'/transfers/uploads/{username}'
+        url = self.api_url + f'/transfers/uploads/{quote(username)}'
         response = self.session.get(url)
         return response.json()

@@ -26,7 +26,7 @@ class ConversationsApi(BaseApi):
 
         :return: True if successful.
         """
-        url = self.api_url + f'/conversations/{username}/{id}'
+        url = self.api_url + f'/conversations/{quote(username)}/{id}'
         response = self.session.put(url)
         return response.ok
     
@@ -37,7 +37,7 @@ class ConversationsApi(BaseApi):
 
         :return: True if successful.
         """
-        url = self.api_url + f'/conversations/{username}'
+        url = self.api_url + f'/conversations/{quote(username)}'
         response = self.session.put(url)
         return response.ok
     
@@ -48,7 +48,7 @@ class ConversationsApi(BaseApi):
 
         :return: True if successful.
         """
-        url = self.api_url + f'/conversations/{username}'
+        url = self.api_url + f'/conversations/{quote(username)}'
         response = self.session.delete(url)
         return response.ok
     
@@ -57,7 +57,7 @@ class ConversationsApi(BaseApi):
         """
         Gets the conversation associated with the specified username.
         """
-        url = self.api_url + f'/conversations/{username}'
+        url = self.api_url + f'/conversations/{quote(username)}'
         params = dict(
             includeMessages=includeMessages
         )
@@ -71,7 +71,7 @@ class ConversationsApi(BaseApi):
 
         :return: True if successful.
         """
-        url = self.api_url + f'/conversations/{username}'
+        url = self.api_url + f'/conversations/{quote(username)}'
         response = self.session.post(url, json=message)
         return response.ok
     
@@ -93,7 +93,7 @@ class ConversationsApi(BaseApi):
         """
         Gets all messages associated with the specified username.
         """
-        url = self.api_url + f'/conversations/{username}/messages'
+        url = self.api_url + f'/conversations/{quote(username)}/messages'
         params = dict(
             username=username,
             unAcknowledgedOnly=unAcknowledgedOnly

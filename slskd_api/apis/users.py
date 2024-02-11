@@ -24,7 +24,7 @@ class UsersApi(BaseApi):
         """
         Retrieves the address of the specified username.
         """
-        url = self.api_url + f'/users/{username}/endpoint'
+        url = self.api_url + f'/users/{quote(username)}/endpoint'
         response = self.session.get(url)
         return response.json()
     
@@ -33,7 +33,7 @@ class UsersApi(BaseApi):
         """
         Retrieves the files shared by the specified username.
         """
-        url = self.api_url + f'/users/{username}/browse'
+        url = self.api_url + f'/users/{quote(username)}/browse'
         response = self.session.get(url)
         return response.json()
     
@@ -44,7 +44,7 @@ class UsersApi(BaseApi):
         Will return error 404 if called after the browsing operation has ended.
         Best called asynchronously while :py:func:`browse` is still running.
         """
-        url = self.api_url + f'/users/{username}/browse/status'
+        url = self.api_url + f'/users/{quote(username)}/browse/status'
         response = self.session.get(url)
         return response.json()
     
@@ -53,7 +53,7 @@ class UsersApi(BaseApi):
         """
         Retrieves the files from the specified directory from the specified username.
         """
-        url = self.api_url + f'/users/{username}/directory'
+        url = self.api_url + f'/users/{quote(username)}/directory'
         data = {
             "directory": directory
         }
@@ -65,7 +65,7 @@ class UsersApi(BaseApi):
         """
         Retrieves information about the specified username.
         """
-        url = self.api_url + f'/users/{username}/info'
+        url = self.api_url + f'/users/{quote(username)}/info'
         response = self.session.get(url)
         return response.json()
     
@@ -74,6 +74,6 @@ class UsersApi(BaseApi):
         """
         Retrieves status for the specified username.
         """
-        url = self.api_url + f'/users/{username}/status'
+        url = self.api_url + f'/users/{quote(username)}/status'
         response = self.session.get(url)
         return response.json()

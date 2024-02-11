@@ -14,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import requests
+from urllib.parse import quote
 
 class BaseApi:
     """
