@@ -14,7 +14,33 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from .base import *
-from typing import Union
+from typing import Union, TypedDict, Literal
+
+class DownloadedFile(TypedDict):
+    averageSpeed: int
+    bytesRemaining: int
+    bytesTransferred: int
+    direction: Literal["Download"] # TODO: incomplete, but haven't figured out others.
+    enqueuedAt: str  # date
+    filename: str  # remote filename
+    id: str
+    percentComplete: float
+    requestedAt: str
+    size: int
+    startOffset: int
+    state: Literal["Initializing"] # TODO: incomplete, but haven't figured out others.
+    username: str
+
+
+class DownloadDirectory(TypedDict):
+    directory: str  # remote directory
+    fileCount: int
+    files: list[DownloadedFile]
+
+
+class Download(TypedDict):
+    username: str
+    directories: list[DownloadDirectory]
 
 class TransfersApi(BaseApi):
     """
@@ -35,7 +61,7 @@ class TransfersApi(BaseApi):
         return response.ok
     
 
-    def get_download(self, username: str, id: str) -> dict:
+    def get_download(self, username: str, id: str) -> Download:
         """
         Gets the specified download.
         """
@@ -104,7 +130,7 @@ class TransfersApi(BaseApi):
         return response.ok
     
 
-    def get_downloads(self, username: str) -> dict:
+    def get_downloads(self, username: str) -> list[Download]:
         """
         Gets all downloads for the specified username.
         """
@@ -113,7 +139,7 @@ class TransfersApi(BaseApi):
         return response.json()
     
 
-    def get_all_downloads(self, includeRemoved: bool = False) -> list:
+    def get_all_downloads(self, includeRemoved: bool = False) -> list[Download]:
         """
         Gets all downloads.
         """

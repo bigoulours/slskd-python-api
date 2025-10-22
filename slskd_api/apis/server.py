@@ -14,6 +14,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from .base import *
+from typing import TypedDict, Literal
+
+class ServerState(TypedDict):
+    address: str
+    ipEndPoint: str
+    state: Literal["Connected, LoggedIn", "Disconnected"] # TODO: not sure if complete, but haven't figured out others.
+    isConnected: bool
+    isLoggedIn: bool
+    isTransitioning: bool
+
 
 class ServerApi(BaseApi):
     """
@@ -42,7 +52,7 @@ class ServerApi(BaseApi):
         return response.ok
     
 
-    def state(self) -> dict:
+    def state(self) -> ServerState:
         """
         Retrieves the current state of the server.
         """
