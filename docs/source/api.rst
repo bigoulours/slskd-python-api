@@ -73,6 +73,10 @@ ______________
 apis/server.py
 ______________
 
+.. autoclass:: slskd_api.apis.server.ServerState
+   :members:
+   :undoc-members:
+
 .. autoclass:: slskd_api.apis.ServerApi
    :members:
 
@@ -90,6 +94,18 @@ ______________
 
 apis/transfers.py
 ______________
+
+.. autoclass:: slskd_api.apis.transfers.DownloadedFile
+   :members:
+   :undoc-members:
+
+.. autoclass:: slskd_api.apis.transfers.DownloadDirectory
+   :members:
+   :undoc-members:
+
+.. autoclass:: slskd_api.apis.transfers.Download
+   :members:
+   :undoc-members:
 
 .. autoclass:: slskd_api.apis.TransfersApi
    :members:

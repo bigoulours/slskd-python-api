@@ -17,6 +17,9 @@ from .base import *
 from typing import TypedDict, Literal
 
 class ServerState(TypedDict):
+    """
+    TypedDict describing server state. Returned by :py:meth:`~slskd_api.apis.ServerApi.state`.
+    """
     address: str
     ipEndPoint: str
     state: Literal["Connected, LoggedIn", "Disconnected"] # TODO: not sure if complete, but haven't figured out others.

@@ -17,6 +17,9 @@ from .base import *
 from typing import Union, TypedDict, Literal
 
 class DownloadedFile(TypedDict):
+    """
+    TypedDict describing a downloaded file. Element found in :py:class:`~slskd_api.apis.transfers.DownloadDirectory`.
+    """
     averageSpeed: int
     bytesRemaining: int
     bytesTransferred: int
@@ -33,12 +36,18 @@ class DownloadedFile(TypedDict):
 
 
 class DownloadDirectory(TypedDict):
+    """
+    TypedDict describing a downloaded directory. Element found in :py:class:`~slskd_api.apis.transfers.Download`.
+    """
     directory: str  # remote directory
     fileCount: int
     files: list[DownloadedFile]
 
 
 class Download(TypedDict):
+    """
+    TypedDict describing a download from a given user.
+    """
     username: str
     directories: list[DownloadDirectory]
 
