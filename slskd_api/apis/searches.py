@@ -18,6 +18,9 @@ import uuid
 from typing import Optional, TypedDict, Any, Literal, NotRequired
 
 class SearchState(TypedDict):
+    """
+    TypedDict describing search state. Returned by :py:meth:`~slskd_api.apis.SearchesApi.state`.
+    """
     fileCount: int
     id: str
     isComplete: bool
@@ -30,6 +33,9 @@ class SearchState(TypedDict):
     token: int
 
 class SearchFile(TypedDict):
+    """
+    TypedDict describing a single search file result. Element found in :py:class:`~slskd_api.apis.searches.SearchResponseItem`.
+    """
     filename: str
     size: int
     code: int
@@ -39,6 +45,9 @@ class SearchFile(TypedDict):
     sampleRate: NotRequired[int]
 
 class SearchResponseItem(TypedDict):
+    """
+    TypedDict describing a search response item. Single element of list returned by :py:meth:`~slskd_api.apis.SearchesApi.search_responses`.
+    """
     username: str
     fileCount: int
     files: list[SearchFile]

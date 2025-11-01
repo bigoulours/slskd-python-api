@@ -55,6 +55,18 @@ ______________
 apis/searches.py
 ______________
 
+.. autoclass:: slskd_api.apis.searches.SearchState
+   :members:
+   :undoc-members:
+
+.. autoclass:: slskd_api.apis.searches.SearchFile
+   :members:
+   :undoc-members:
+
+.. autoclass:: slskd_api.apis.searches.SearchResponseItem
+   :members:
+   :undoc-members:
+
 .. autoclass:: slskd_api.apis.SearchesApi
    :members:
 
