@@ -15,7 +15,40 @@
 
 from .base import *
 import uuid
-from typing import Optional
+from typing import Optional, TypedDict, Any, Literal, NotRequired
+
+class SearchState(TypedDict):
+    fileCount: int
+    id: str
+    isComplete: bool
+    lockedFileCount: int
+    responseCount: int
+    responses: list[Any]  # TODO: type this
+    searchText: str
+    startedAt: str  # ISO date
+    state: Literal["InProgress", "Completed"]  # TODO: not sure if complete, but haven't figured out others.
+    token: int
+
+class SearchFile(TypedDict):
+    filename: str
+    size: int
+    code: int
+    isLocked: bool
+    bitRate: NotRequired[int]
+    length: NotRequired[int]
+    sampleRate: NotRequired[int]
+
+class SearchResponseItem(TypedDict):
+    username: str
+    fileCount: int
+    files: list[SearchFile]
+    hasFreeUploadSlot: bool
+    lockedFileCount: int
+    lockedFiles: list
+    queueLength: int
+    token: int
+    uploadSpeed: int
+
 
 class SearchesApi(BaseApi):
     """
@@ -79,7 +112,7 @@ class SearchesApi(BaseApi):
         return response.json()
     
 
-    def state(self, id: str, includeResponses: bool = False) -> dict:
+    def state(self, id: str, includeResponses: bool = False) -> SearchState:
         """
         Gets the state of the search corresponding to the specified id.
 
@@ -117,7 +150,7 @@ class SearchesApi(BaseApi):
         return response.ok
     
 
-    def search_responses(self, id: str) -> list:
+    def search_responses(self, id: str) -> list[SearchResponseItem]:
         """
         Gets search responses corresponding to the specified id.
         """
