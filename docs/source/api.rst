@@ -7,9 +7,6 @@ _________
 .. autoclass:: slskd_api.SlskdClient
    :members:
 
-.. autoclass:: slskd_api.MetricsApi
-   :members:
-
 apis/application.py
 ___________________
 
@@ -26,6 +23,12 @@ apis/logs.py
 ____________
 
 .. autoclass:: slskd_api.apis.LogsApi
+   :members:
+
+apis/metrics.py
+____________
+
+.. autoclass:: slskd_api.apis.MetricsApi
    :members:
 
 apis/options.py

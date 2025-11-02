@@ -13,6 +13,17 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .client import SlskdClient
+from .base import *
 
-__all__ = ('SlskdClient')
+class MetricsApi(BaseApi):
+    """
+    This class contains the methods to interact with the Metrics API.
+    """
+
+    def get(self) -> str:
+        """
+        Gets the Prometheus metrics as text.
+        """
+        url = self.api_url + '/metrics'
+        response = self.session.get(url)
+        return response.text

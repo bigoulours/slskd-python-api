@@ -16,6 +16,7 @@
 from .application import ApplicationApi
 from .conversations import ConversationsApi
 from .logs import LogsApi
+from .metrics import MetricsApi
 from .options import OptionsApi
 from .public_chat import PublicChatApi
 from .relay import RelayApi
@@ -31,6 +32,7 @@ __all__ = (
     'ApplicationApi',
     'ConversationsApi',
     'LogsApi',
+    'MetricsApi',
     'OptionsApi',
     'PublicChatApi',
     'RelayApi',
