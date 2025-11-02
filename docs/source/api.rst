@@ -62,14 +62,17 @@ ________________
 .. autoclass:: slskd_api.apis.searches.SearchFile
    :members:
    :undoc-members:
+   :no-index-entry:
 
 .. autoclass:: slskd_api.apis.searches.SearchResponseItem
    :members:
    :undoc-members:
+   :no-index-entry:
 
 .. autoclass:: slskd_api.apis.searches.SearchState
    :members:
    :undoc-members:
+   :no-index-entry:
 
 .. autoclass:: slskd_api.apis.SearchesApi
    :members:
@@ -80,6 +83,7 @@ ______________
 .. autoclass:: slskd_api.apis.server.ServerState
    :members:
    :undoc-members:
+   :no-index-entry:
 
 .. autoclass:: slskd_api.apis.ServerApi
    :members:
@@ -102,14 +106,17 @@ _________________
 .. autoclass:: slskd_api.apis.transfers.TransferedFile
    :members:
    :undoc-members:
+   :no-index-entry:
 
 .. autoclass:: slskd_api.apis.transfers.TransferedDirectory
    :members:
    :undoc-members:
+   :no-index-entry:
 
 .. autoclass:: slskd_api.apis.transfers.Transfer
    :members:
    :undoc-members:
+   :no-index-entry:
 
 .. autoclass:: slskd_api.apis.TransfersApi
    :members:
