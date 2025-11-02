@@ -19,6 +19,13 @@ _____________________
 .. autoclass:: slskd_api.apis.ConversationsApi
    :members:
 
+apis/events.py
+______________
+
+.. autotype:: slskd_api.apis.events.EventType
+.. autoclass:: slskd_api.apis.EventsApi
+   :members:
+
 apis/logs.py
 ____________
 

@@ -15,6 +15,7 @@
 
 from .application import ApplicationApi
 from .conversations import ConversationsApi
+from .events import EventsApi
 from .logs import LogsApi
 from .metrics import MetricsApi
 from .options import OptionsApi
@@ -30,6 +31,7 @@ from .users import UsersApi
 __all__ = (
     'ApplicationApi',
     'ConversationsApi',
+    'EventsApi',
     'LogsApi',
     'MetricsApi',
     'OptionsApi',

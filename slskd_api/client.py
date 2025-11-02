@@ -79,6 +79,7 @@ class SlskdClient:
         
         self.application = ApplicationApi(*base_args)
         self.conversations = ConversationsApi(*base_args)
+        self.events = EventsApi(*base_args)
         self.logs = LogsApi(*base_args)
         self.metrics = MetricsApi(*base_args)
         self.options = OptionsApi(*base_args)
