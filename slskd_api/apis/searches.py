@@ -192,7 +192,7 @@ class SearchesApi(BaseApi):
         response = self.session.get(url)
         return response.json()
     
-    def wait_for_search(self, id: str, timeout: int = 10, interval: int = 0.5) -> None:
+    def wait_for_search(self, id: str, timeout: int = 10, interval: int = 0.5) -> SearchState:
         """
         Waits for a search to complete.
 
@@ -200,14 +200,14 @@ class SearchesApi(BaseApi):
         :param timeout: Timeout (in secs) on which to error if the search has gone stagnant
               (NOTE: this is not the timeout of the overall search. It is the timeout for when no new results are provided.)
         :param interval: Interval (in secs) at which the query to `self.state` is performed.
-        :return: None, when is complete, otherwise throws `TimeoutError`.
+        :return: SearchState, when is complete, otherwise throws `TimeoutError`.
         """
         timeout_start = time.time()
         prev_results_cnt: int = 0
         while True:
             search_state = self.state(id)
             if search_state["isComplete"] and "Completed" in search_state["state"]:
-                return
+                return search_state
             if search_state["responseCount"] > prev_results_cnt:
                 timeout_start = time.time()
                 prev_results_cnt = search_state["responseCount"]
