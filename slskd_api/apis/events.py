@@ -14,9 +14,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from .base import *
-from typing import Optional, TypedDict, Literal
+from typing import Optional, TypedDict, Literal, TypeAlias
 
-type EventType = Literal["DownloadFileComplete", "DownloadDirectoryComplete", "UploadFileComplete", "PrivateMessageReceived", "RoomMessageReceived", "Noop"]
+EventType: TypeAlias = Literal["DownloadFileComplete", "DownloadDirectoryComplete", "UploadFileComplete", "PrivateMessageReceived", "RoomMessageReceived", "Noop"]
 
 class Event(TypedDict):
     """
@@ -39,6 +39,7 @@ class EventsApi(BaseApi):
         ) -> list[Event]:
         """
         Retrieves a paginated list of past event records.
+        
         :param start: The offset (number of records) at which to start the requested page.
         :param limit: The page size.
         """

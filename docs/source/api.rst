@@ -22,7 +22,11 @@ _____________________
 apis/events.py
 ______________
 
-.. autotype:: slskd_api.apis.events.EventType
+.. autoclass:: slskd_api.apis.events.Event
+   :members:
+   :undoc-members:
+   :no-index-entry:
+
 .. autoclass:: slskd_api.apis.EventsApi
    :members:
 
