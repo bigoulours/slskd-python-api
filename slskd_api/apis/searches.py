@@ -194,7 +194,7 @@ class SearchesApi(BaseApi):
     
     def wait_for_search(self, id: str, timeout: int = 10, interval: int = 0.5) -> None:
         """
-        Waits for a search to complete, returning the search responses when complete.
+        Waits for a search to complete.
 
         :param id: uuid of the search.
         :param timeout: Timeout (in secs) on which to error if the search has gone stagnant
