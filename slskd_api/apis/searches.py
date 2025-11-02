@@ -15,22 +15,8 @@
 
 from .base import *
 import uuid
-from typing import Optional, TypedDict, Any, Literal, NotRequired
+from typing import Optional, TypedDict
 
-class SearchState(TypedDict):
-    """
-    TypedDict describing search state. Returned by :py:meth:`~slskd_api.apis.SearchesApi.state`.
-    """
-    fileCount: int
-    id: str
-    isComplete: bool
-    lockedFileCount: int
-    responseCount: int
-    responses: list[Any]  # TODO: type this
-    searchText: str
-    startedAt: str  # ISO date
-    state: Literal["InProgress", "Completed"]  # TODO: not sure if complete, but haven't figured out others.
-    token: int
 
 class SearchFile(TypedDict):
     """
@@ -40,23 +26,41 @@ class SearchFile(TypedDict):
     size: int
     code: int
     isLocked: bool
-    bitRate: NotRequired[int]
-    length: NotRequired[int]
-    sampleRate: NotRequired[int]
+    extension: str
+    bitRate: int # for lossy format
+    bitDepth: int # for lossless format
+    length: int # in sec
+    sampleRate: int # in Hz
 
 class SearchResponseItem(TypedDict):
     """
     TypedDict describing a search response item. Single element of list returned by :py:meth:`~slskd_api.apis.SearchesApi.search_responses`.
     """
-    username: str
     fileCount: int
     files: list[SearchFile]
     hasFreeUploadSlot: bool
     lockedFileCount: int
-    lockedFiles: list
+    lockedFiles: list[SearchFile]
     queueLength: int
     token: int
     uploadSpeed: int
+    username: str
+
+class SearchState(TypedDict):
+    """
+    TypedDict describing search state. Returned by :py:meth:`~slskd_api.apis.SearchesApi.state`.
+    """
+    endedAt: str
+    fileCount: int
+    id: str
+    isComplete: bool
+    lockedFileCount: int
+    responseCount: int
+    responses: list[SearchResponseItem]
+    searchText: str
+    startedAt: str  # ISO date
+    state: str
+    token: int
 
 
 class SearchesApi(BaseApi):

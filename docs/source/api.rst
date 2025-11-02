@@ -11,59 +11,59 @@ _________
    :members:
 
 apis/application.py
-______________
+___________________
 
 .. autoclass:: slskd_api.apis.ApplicationApi
    :members:
 
 apis/conversations.py
-______________
+_____________________
 
 .. autoclass:: slskd_api.apis.ConversationsApi
    :members:
 
 apis/logs.py
-______________
+____________
 
 .. autoclass:: slskd_api.apis.LogsApi
    :members:
 
 apis/options.py
-______________
+_______________
 
 .. autoclass:: slskd_api.apis.OptionsApi
    :members:
 
 apis/public_chat.py
-______________
+___________________
 
 .. autoclass:: slskd_api.apis.PublicChatApi
    :members:
 
 apis/relay.py
-______________
+_____________
 
 .. autoclass:: slskd_api.apis.RelayApi
    :members:
 
 apis/rooms.py
-______________
+_____________
 
 .. autoclass:: slskd_api.apis.RoomsApi
    :members:
 
 apis/searches.py
-______________
-
-.. autoclass:: slskd_api.apis.searches.SearchState
-   :members:
-   :undoc-members:
+________________
 
 .. autoclass:: slskd_api.apis.searches.SearchFile
    :members:
    :undoc-members:
 
 .. autoclass:: slskd_api.apis.searches.SearchResponseItem
+   :members:
+   :undoc-members:
+
+.. autoclass:: slskd_api.apis.searches.SearchState
    :members:
    :undoc-members:
 
@@ -81,7 +81,7 @@ ______________
    :members:
 
 apis/session.py
-______________
+_______________
 
 .. autoclass:: slskd_api.apis.SessionApi
    :members:
@@ -93,17 +93,17 @@ ______________
    :members:
 
 apis/transfers.py
-______________
+_________________
 
-.. autoclass:: slskd_api.apis.transfers.DownloadedFile
+.. autoclass:: slskd_api.apis.transfers.TransferedFile
    :members:
    :undoc-members:
 
-.. autoclass:: slskd_api.apis.transfers.DownloadDirectory
+.. autoclass:: slskd_api.apis.transfers.TransferedDirectory
    :members:
    :undoc-members:
 
-.. autoclass:: slskd_api.apis.transfers.Download
+.. autoclass:: slskd_api.apis.transfers.Transfer
    :members:
    :undoc-members:
 
@@ -111,7 +111,7 @@ ______________
    :members:
 
 apis/users.py
-______________
+_____________
 
 .. autoclass:: slskd_api.apis.UsersApi
    :members:

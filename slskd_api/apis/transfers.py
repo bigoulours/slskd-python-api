@@ -16,40 +16,44 @@
 from .base import *
 from typing import Union, TypedDict, Literal
 
-class DownloadedFile(TypedDict):
+class TransferedFile(TypedDict):
     """
-    TypedDict describing a downloaded file. Element found in :py:class:`~slskd_api.apis.transfers.DownloadDirectory`.
+    TypedDict describing a transfered file. Element found in :py:class:`~slskd_api.apis.transfers.TransferedDirectory`.
     """
-    averageSpeed: int
-    bytesRemaining: int
-    bytesTransferred: int
-    direction: Literal["Download"] # TODO: incomplete, but haven't figured out others.
-    enqueuedAt: str  # date
-    filename: str  # remote filename
     id: str
-    percentComplete: float
-    requestedAt: str
+    username: str
+    direction: Literal["Download", "Upload"]
+    filename: str 
     size: int
     startOffset: int
-    state: Literal["Initializing"] # TODO: incomplete, but haven't figured out others.
-    username: str
+    state: str
+    requestedAt: str
+    enqueuedAt: str
+    startedAt: str
+    endedAt: str
+    bytesTransferred: int
+    averageSpeed: float
+    bytesRemaining: int
+    elapsedTime: str
+    percentComplete: float
+    remainingTime: str
 
 
-class DownloadDirectory(TypedDict):
+class TransferedDirectory(TypedDict):
     """
-    TypedDict describing a downloaded directory. Element found in :py:class:`~slskd_api.apis.transfers.Download`.
+    TypedDict describing a transfered directory. Element found in :py:class:`~slskd_api.apis.transfers.Transfer`.
     """
     directory: str  # remote directory
     fileCount: int
-    files: list[DownloadedFile]
+    files: list[TransferedFile]
 
 
-class Download(TypedDict):
+class Transfer(TypedDict):
     """
-    TypedDict describing a download from a given user.
+    TypedDict describing transfer(s) to/from a given user.
     """
     username: str
-    directories: list[DownloadDirectory]
+    directories: list[TransferedDirectory]
 
 class TransfersApi(BaseApi):
     """
@@ -70,7 +74,7 @@ class TransfersApi(BaseApi):
         return response.ok
     
 
-    def get_download(self, username: str, id: str) -> Download:
+    def get_download(self, username: str, id: str) -> Transfer:
         """
         Gets the specified download.
         """
@@ -104,7 +108,7 @@ class TransfersApi(BaseApi):
         return response.ok
     
 
-    def get_upload(self, username: str, id: str) -> dict:
+    def get_upload(self, username: str, id: str) -> Transfer:
         """
         Gets the specified upload.
         """
@@ -139,7 +143,7 @@ class TransfersApi(BaseApi):
         return response.ok
     
 
-    def get_downloads(self, username: str) -> list[Download]:
+    def get_downloads(self, username: str) -> Transfer:
         """
         Gets all downloads for the specified username.
         """
@@ -148,7 +152,7 @@ class TransfersApi(BaseApi):
         return response.json()
     
 
-    def get_all_downloads(self, includeRemoved: bool = False) -> list[Download]:
+    def get_all_downloads(self, includeRemoved: bool = False) -> list[Transfer]:
         """
         Gets all downloads.
         """
@@ -171,7 +175,7 @@ class TransfersApi(BaseApi):
         return response.json()
     
 
-    def get_all_uploads(self, includeRemoved: bool = False) -> list:
+    def get_all_uploads(self, includeRemoved: bool = False) -> list[Transfer]:
         """
         Gets all uploads.
         """
@@ -183,7 +187,7 @@ class TransfersApi(BaseApi):
         return response.json()
     
 
-    def get_uploads(self, username: str) -> dict:
+    def get_uploads(self, username: str) -> Transfer:
         """
         Gets all uploads for the specified username.
         """
