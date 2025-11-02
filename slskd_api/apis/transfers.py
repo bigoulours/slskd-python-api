@@ -73,6 +73,18 @@ class TransfersApi(BaseApi):
         response = self.session.delete(url, params=params)
         return response.ok
     
+    def cancel_all_downloads(self, remove: bool = False) -> None:
+        """
+        Cancels all downloads.
+
+        :return: None. Throws error if not successful.
+        """
+        for download in self.get_all_downloads():
+            for directory in download["directories"]:
+                for file in directory["files"]:
+                    ok = self.cancel_download(download["username"], file["id"], remove)
+                    assert ok, f"cancel_download failed on {file["filename"]}"
+    
 
     def get_download(self, username: str, id: str) -> Transfer:
         """

@@ -15,6 +15,7 @@
 
 from .base import *
 import uuid
+import time
 from typing import Optional, TypedDict
 
 
@@ -151,6 +152,16 @@ class SearchesApi(BaseApi):
         response = self.session.put(url)
         return response.ok
     
+    def stop_all(self) -> None:
+        """
+        Stops all searches.
+
+        :return: None. Throws error if not successful.
+        """
+        for search in self.get_all():
+            ok = self.stop(search["id"])
+            assert ok, f"stop failed on {search["filename"]}"
+    
 
     def delete(self, id: str):
         """
@@ -162,6 +173,16 @@ class SearchesApi(BaseApi):
         response = self.session.delete(url)
         return response.ok
     
+    def delete_all(self) -> None:
+        """
+        Deletes all searches.
+
+        :return: None. Throws error if not successful.
+        """
+        for search in self.get_all():
+            ok = self.delete(search["id"])
+            assert ok, f"delete failed on {search["filename"]}"
+    
 
     def search_responses(self, id: str) -> list[SearchResponseItem]:
         """
@@ -170,3 +191,26 @@ class SearchesApi(BaseApi):
         url = self.api_url + f'/searches/{id}/responses'
         response = self.session.get(url)
         return response.json()
+    
+    def wait_for_search(self, id: str, timeout: int = 10, interval: int = 0.5) -> None:
+        """
+        Waits for a search to complete, returning the search responses when complete.
+
+        :param id: uuid of the search.
+        :param timeout: Timeout (in secs) on which to error if the search has gone stagnant
+              (NOTE: this is not the timeout of the overall search. It is the timeout for when no new results are provided.)
+        :param interval: Interval (in secs) at which the query to `self.state` is performed.
+        :return: None, when is complete, otherwise throws `TimeoutError`.
+        """
+        timeout_start = time.time()
+        prev_results_cnt: int = 0
+        while True:
+            search_state = self.state(id)
+            if search_state["isComplete"] and "Completed" in search_state["state"]:
+                return
+            if search_state["responseCount"] > prev_results_cnt:
+                timeout_start = time.time()
+                prev_results_cnt = search_state["responseCount"]
+            if time.time() - timeout_start > timeout:
+                raise TimeoutError("search timed out")
+            time.sleep(interval)
