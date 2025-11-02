@@ -37,12 +37,6 @@ _______________
 .. autoclass:: slskd_api.apis.OptionsApi
    :members:
 
-apis/public_chat.py
-___________________
-
-.. autoclass:: slskd_api.apis.PublicChatApi
-   :members:
-
 apis/relay.py
 _____________
 

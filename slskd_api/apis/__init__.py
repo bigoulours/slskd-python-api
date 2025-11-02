@@ -18,7 +18,6 @@ from .conversations import ConversationsApi
 from .logs import LogsApi
 from .metrics import MetricsApi
 from .options import OptionsApi
-from .public_chat import PublicChatApi
 from .relay import RelayApi
 from .rooms import RoomsApi
 from .searches import SearchesApi
@@ -34,7 +33,6 @@ __all__ = (
     'LogsApi',
     'MetricsApi',
     'OptionsApi',
-    'PublicChatApi',
     'RelayApi',
     'RoomsApi',
     'SearchesApi',
