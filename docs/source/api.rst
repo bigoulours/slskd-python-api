@@ -40,6 +40,22 @@ ______________
 .. autoclass:: slskd_api.apis.EventsApi
    :members:
 
+apis/files.py
+______________
+
+.. autoclass:: slskd_api.apis.files.File
+   :members:
+   :undoc-members:
+   :no-index:
+
+.. autoclass:: slskd_api.apis.files.Directory
+   :members:
+   :undoc-members:
+   :no-index-entry:
+
+.. autoclass:: slskd_api.apis.FilesApi
+   :members:
+
 apis/logs.py
 ____________
 
