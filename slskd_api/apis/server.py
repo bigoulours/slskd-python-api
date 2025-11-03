@@ -24,7 +24,9 @@ class ServerState(TypedDict):
     ipEndPoint: str
     state: Literal["Connected, LoggedIn", "Disconnected"] # TODO: not sure if complete, but haven't figured out others.
     isConnected: bool
+    isConnecting: bool
     isLoggedIn: bool
+    isLoggingIn: bool
     isTransitioning: bool
 
 

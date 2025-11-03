@@ -78,7 +78,7 @@ class SearchesApi(BaseApi):
                     minimumResponseFileCount: int = 1,
                     responseLimit: int = 100,
                     searchTimeout: int = 15000
-        ) -> dict:
+        ) -> SearchState:
         """
         Performs a search for the specified request.
 
@@ -116,7 +116,7 @@ class SearchesApi(BaseApi):
         return response.json()
     
 
-    def get_all(self) -> list:
+    def get_all(self) -> list[SearchState]:
         """
         Gets the list of active and completed searches.
         """
@@ -152,7 +152,7 @@ class SearchesApi(BaseApi):
         return response.ok
     
 
-    def delete(self, id: str):
+    def delete(self, id: str) -> bool:
         """
         Deletes the search corresponding to the specified id.
 
@@ -166,6 +166,9 @@ class SearchesApi(BaseApi):
     def search_responses(self, id: str) -> list[SearchResponseItem]:
         """
         Gets search responses corresponding to the specified id.
+        
+        :param id: uuid of the search.
+        :return: Search responses.
         """
         url = self.api_url + f'/searches/{id}/responses'
         response = self.session.get(url)

@@ -49,7 +49,7 @@ class EventsApi(BaseApi):
 
     def create(self,
             event_type: EventType,
-            data: Optional[dict], # ToDo: figure out how this works and describe it
+            data: Optional[str], # ToDo: figure out how this works
         ) -> bool:
         """
         Raises a sample event of the specified type.

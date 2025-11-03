@@ -10,6 +10,16 @@ _________
 apis/application.py
 ___________________
 
+.. autoclass:: slskd_api.apis.application.AppVersion
+   :members:
+   :undoc-members:
+   :no-index-entry:
+
+.. autoclass:: slskd_api.apis.application.AppState
+   :members:
+   :undoc-members:
+   :no-index-entry:
+
 .. autoclass:: slskd_api.apis.ApplicationApi
    :members:
 
@@ -32,6 +42,11 @@ ______________
 
 apis/logs.py
 ____________
+
+.. autoclass:: slskd_api.apis.logs.LogEntry
+   :members:
+   :undoc-members:
+   :no-index-entry:
 
 .. autoclass:: slskd_api.apis.LogsApi
    :members:

@@ -14,13 +14,45 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from .base import *
+from typing import TypedDict
+from .server import ServerState
+
+class AppVersion(TypedDict):
+    """
+    TypedDict describing application version. Returned by :py:meth:`~slskd_api.apis.ApplicationApi.check_updates`.
+    """
+    full: str
+    current: str
+    latest: str
+    isUpdateAvailable: bool
+    isCanary: bool
+    isDevelopment: bool
+
+
+class AppState(TypedDict):
+    """
+    TypedDict describing application state. Returned by :py:meth:`~slskd_api.apis.ApplicationApi.state`.
+    """
+    version: AppVersion
+    pendingReconnect: bool
+    pendingRestart: bool
+    server: ServerState
+    # ToDo: describe as TypedDict
+    connectionWatchdog: dict
+    relay: dict
+    user: dict
+    distributedNetwork: dict
+    shares: dict
+    rooms: list
+    users: list
+
 
 class ApplicationApi(BaseApi):
     """
     This class contains the methods to interact with the Application API.
     """
 
-    def state(self) -> dict:
+    def state(self) -> AppState:
         """
         Gets the current state of the application.
         """
@@ -60,7 +92,7 @@ class ApplicationApi(BaseApi):
         return response.json()
     
 
-    def check_updates(self, forceCheck: bool = False) -> dict:
+    def check_updates(self, forceCheck: bool = False) -> AppVersion:
         """
         Checks for updates.
         """
