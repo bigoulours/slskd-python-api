@@ -23,8 +23,7 @@ granted an API-Key was setup in your `slskd configuration file <https://github.c
    import slskd_api
    slskd = slskd_api.SlskdClient(host, api_key, url_base)
 
-From there all APIs (with the exception of :py:class:`~slskd_api.MetricsApi`) 
-will be accessible through ``slskd``:
+From there all APIs will be accessible through ``slskd``:
 
 .. code-block:: console
 

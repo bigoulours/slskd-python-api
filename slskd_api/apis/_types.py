@@ -199,7 +199,7 @@ class TransferedDirectory(TypedDict):
 
 class Transfer(TypedDict):
     """
-    TypedDict describing transfer(s) to/from a given user. See :py:class:`~slskd_api.apis.TransferApi`.
+    TypedDict describing transfer(s) to/from a given user. See :py:class:`~slskd_api.apis.TransfersApi`.
     """
     username: str
     directories: list[TransferedDirectory]
