@@ -13,34 +13,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .base import *
-from typing import TypedDict
-
-
-class File(TypedDict):
-    """
-    TypedDict describing a file.
-    """
-    name: str
-    fullname: str
-    length: int
-    attributes: str
-    createdAt: str
-    modifiedAt: str
-    
-
-class Directory(TypedDict):
-    """
-    TypedDict describing a directory.
-    """
-    name: str
-    fullname: str
-    attributes: str
-    createdAt: str
-    modifiedAt: str
-    files: list[File]
-    directories: list['Directory']
-
+from ._base import *
+from ._types import *
 
 class FilesApi(BaseApi):
     """

@@ -13,47 +13,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .base import *
-from typing import Union, TypedDict, Literal
+from ._base import *
+from ._types import *
 
-class TransferedFile(TypedDict):
-    """
-    TypedDict describing a transfered file. Element found in :py:class:`~slskd_api.apis.transfers.TransferedDirectory`.
-    """
-    id: str
-    username: str
-    direction: Literal["Download", "Upload"]
-    filename: str 
-    size: int
-    startOffset: int
-    state: str
-    requestedAt: str
-    enqueuedAt: str
-    startedAt: str
-    endedAt: str
-    bytesTransferred: int
-    averageSpeed: float
-    bytesRemaining: int
-    elapsedTime: str
-    percentComplete: float
-    remainingTime: str
-
-
-class TransferedDirectory(TypedDict):
-    """
-    TypedDict describing a transfered directory. Element found in :py:class:`~slskd_api.apis.transfers.Transfer`.
-    """
-    directory: str  # remote directory
-    fileCount: int
-    files: list[TransferedFile]
-
-
-class Transfer(TypedDict):
-    """
-    TypedDict describing transfer(s) to/from a given user.
-    """
-    username: str
-    directories: list[TransferedDirectory]
 
 class TransfersApi(BaseApi):
     """

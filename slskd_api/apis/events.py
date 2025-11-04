@@ -13,19 +13,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .base import *
-from typing import Optional, TypedDict, Literal, TypeAlias
-
-EventType: TypeAlias = Literal["DownloadFileComplete", "DownloadDirectoryComplete", "UploadFileComplete", "PrivateMessageReceived", "RoomMessageReceived", "Noop"]
-
-class Event(TypedDict):
-    """
-    TypedDict describing an event. Single element of list returned by :py:meth:`~slskd_api.apis.EventsApi.get`.
-    """
-    timestamp: str # ISO date
-    type: EventType
-    data: str # event attributes as json
-    id: str
+from ._base import *
+from ._types import *
 
 
 class EventsApi(BaseApi):
@@ -49,7 +38,7 @@ class EventsApi(BaseApi):
 
     def create(self,
             event_type: EventType,
-            data: Optional[str], # ToDo: figure out how this works
+            data: str = '', # ToDo: figure out how this works
         ) -> bool:
         """
         Raises a sample event of the specified type.

@@ -13,7 +13,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .base import *
+from ._base import *
+from ._types import *
+    
 
 class UsersApi(BaseApi):
     """
@@ -29,7 +31,7 @@ class UsersApi(BaseApi):
         return response.json()
     
 
-    def browse(self, username: str) -> dict:
+    def browse(self, username: str) -> UserRootDir:
         """
         Retrieves the files shared by the specified username.
         """
@@ -49,9 +51,10 @@ class UsersApi(BaseApi):
         return response.json()
     
 
-    def directory(self, username: str, directory: str) -> dict:
+    def directory(self, username: str, directory: str) -> list[UserDirectory]:
         """
-        Retrieves the files from the specified directory from the specified username.
+        Retrieves the specified directory from the specified user.
+        This returns a list (usually with a single element).
         """
         url = self.api_url + f'/users/{quote(username)}/directory'
         data = {

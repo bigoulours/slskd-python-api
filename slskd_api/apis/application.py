@@ -13,38 +13,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .base import *
-from typing import TypedDict
-from .server import ServerState
-
-class AppVersion(TypedDict):
-    """
-    TypedDict describing application version. Returned by :py:meth:`~slskd_api.apis.ApplicationApi.check_updates`.
-    """
-    full: str
-    current: str
-    latest: str
-    isUpdateAvailable: bool
-    isCanary: bool
-    isDevelopment: bool
-
-
-class AppState(TypedDict):
-    """
-    TypedDict describing application state. Returned by :py:meth:`~slskd_api.apis.ApplicationApi.state`.
-    """
-    version: AppVersion
-    pendingReconnect: bool
-    pendingRestart: bool
-    server: ServerState
-    # ToDo: describe as TypedDict
-    connectionWatchdog: dict
-    relay: dict
-    user: dict
-    distributedNetwork: dict
-    shares: dict
-    rooms: list
-    users: list
+from ._base import *
+from ._types import *
 
 
 class ApplicationApi(BaseApi):

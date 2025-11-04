@@ -7,18 +7,16 @@ _________
 .. autoclass:: slskd_api.SlskdClient
    :members:
 
-apis/application.py
+apis/_types.py
 ___________________
 
-.. autoclass:: slskd_api.apis.application.AppVersion
+.. automodule:: slskd_api.apis._types
    :members:
    :undoc-members:
    :no-index-entry:
 
-.. autoclass:: slskd_api.apis.application.AppState
-   :members:
-   :undoc-members:
-   :no-index-entry:
+apis/application.py
+___________________
 
 .. autoclass:: slskd_api.apis.ApplicationApi
    :members:
@@ -32,37 +30,17 @@ _____________________
 apis/events.py
 ______________
 
-.. autoclass:: slskd_api.apis.events.Event
-   :members:
-   :undoc-members:
-   :no-index-entry:
-
 .. autoclass:: slskd_api.apis.EventsApi
    :members:
 
 apis/files.py
 ______________
 
-.. autoclass:: slskd_api.apis.files.File
-   :members:
-   :undoc-members:
-   :no-index:
-
-.. autoclass:: slskd_api.apis.files.Directory
-   :members:
-   :undoc-members:
-   :no-index-entry:
-
 .. autoclass:: slskd_api.apis.FilesApi
    :members:
 
 apis/logs.py
 ____________
-
-.. autoclass:: slskd_api.apis.logs.LogEntry
-   :members:
-   :undoc-members:
-   :no-index-entry:
 
 .. autoclass:: slskd_api.apis.LogsApi
    :members:
@@ -94,31 +72,11 @@ _____________
 apis/searches.py
 ________________
 
-.. autoclass:: slskd_api.apis.searches.SearchFile
-   :members:
-   :undoc-members:
-   :no-index-entry:
-
-.. autoclass:: slskd_api.apis.searches.SearchResponseItem
-   :members:
-   :undoc-members:
-   :no-index-entry:
-
-.. autoclass:: slskd_api.apis.searches.SearchState
-   :members:
-   :undoc-members:
-   :no-index-entry:
-
 .. autoclass:: slskd_api.apis.SearchesApi
    :members:
 
 apis/server.py
 ______________
-
-.. autoclass:: slskd_api.apis.server.ServerState
-   :members:
-   :undoc-members:
-   :no-index-entry:
 
 .. autoclass:: slskd_api.apis.ServerApi
    :members:
@@ -137,21 +95,6 @@ ______________
 
 apis/transfers.py
 _________________
-
-.. autoclass:: slskd_api.apis.transfers.TransferedFile
-   :members:
-   :undoc-members:
-   :no-index-entry:
-
-.. autoclass:: slskd_api.apis.transfers.TransferedDirectory
-   :members:
-   :undoc-members:
-   :no-index-entry:
-
-.. autoclass:: slskd_api.apis.transfers.Transfer
-   :members:
-   :undoc-members:
-   :no-index-entry:
 
 .. autoclass:: slskd_api.apis.TransfersApi
    :members:

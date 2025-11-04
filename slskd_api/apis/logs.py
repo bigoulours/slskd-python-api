@@ -13,17 +13,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .base import *
-from typing import TypedDict
-
-class LogEntry(TypedDict):
-    """
-    TypedDict describing a log entry. Single element of list returned by :py:meth:`~slskd_api.apis.LogsApi.get`.
-    """
-    timestamp: str
-    context: str
-    level: str
-    message: str
+from ._base import *
+from ._types import *
 
 
 class LogsApi(BaseApi):
