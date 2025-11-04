@@ -14,13 +14,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from ._base import *
+from ._types import *
 
 class SharesApi(BaseApi):
     """
     This class contains the methods to interact with the Shares API.
     """
 
-    def get_all(self) -> dict:
+    def get_all(self) -> Shares:
         """
         Gets the current list of shares.
         """
@@ -51,7 +52,7 @@ class SharesApi(BaseApi):
         return response.ok
     
 
-    def get(self, id: str) -> dict:
+    def get(self, id: str) -> SharedDir:
         """
         Gets the share associated with the specified id.
         """

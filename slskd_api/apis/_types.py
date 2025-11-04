@@ -21,7 +21,7 @@ class AppState(TypedDict):
     pendingReconnect: bool
     pendingRestart: bool
     server: 'ServerState'
-    # ToDo: describe as TypedDict
+    # TODO: describe as TypedDict
     connectionWatchdog: dict
     relay: dict
     user: dict
@@ -47,7 +47,7 @@ class Event(TypedDict):
 # FilesApi:
 class File(TypedDict):
     """
-    TypedDict describing a file.
+    TypedDict describing a file in the `downloads` or `incomplete` folder. See :py:class:`~slskd_api.apis.FilesApi`.
     """
     name: str
     fullname: str
@@ -59,7 +59,7 @@ class File(TypedDict):
 
 class Directory(TypedDict):
     """
-    TypedDict describing a directory.
+    TypedDict describing a directory in the `downloads` or `incomplete` folder. See :py:class:`~slskd_api.apis.FilesApi`.
     """
     name: str
     fullname: str
@@ -84,7 +84,7 @@ class LogEntry(TypedDict):
 # SearchApi:
 class SearchFile(TypedDict):
     """
-    TypedDict describing a single search file result. Element found in :py:class:`~slskd_api.apis.searches.SearchResponseItem`.
+    TypedDict describing a single search file result. Element found in :py:class:`~SearchResponseItem`.
     """
     filename: str
     size: int
@@ -126,6 +126,7 @@ class SearchState(TypedDict):
     state: str
     token: int
 
+
 # ServerApi:
 class ServerState(TypedDict):
     """
@@ -138,12 +139,35 @@ class ServerState(TypedDict):
     isConnecting: bool
     isLoggedIn: bool
     isLoggingIn: bool
-    isTransitioning: bool
-     
+    isTransitioning: bool  
 
+
+# SharesApi:
+class SharedDir(TypedDict):
+    """
+    TypedDict describing a shared directory. Returned :py:meth:`~slskd_api.apis.SharesApi.get`.
+    """
+    id: str
+    alias: str
+    isExcluded: bool
+    localPath: str
+    raw: str
+    remotePath: str
+    directories: int
+    files: int
+
+
+class Shares(TypedDict):
+    """
+    TypedDict describing all shares (local or from relays). Returned :py:meth:`~slskd_api.apis.SharesApi.get_all`.
+    """
+    local: list[SharedDir]
+
+
+# TransfersApi
 class TransferedFile(TypedDict):
     """
-    TypedDict describing a transfered file. Element found in :py:class:`~slskd_api.apis.transfers.TransferedDirectory`.
+    TypedDict describing a transfered file. Element found in :py:class:`~TransferedDirectory`.
     """
     id: str
     username: str
@@ -162,12 +186,11 @@ class TransferedFile(TypedDict):
     elapsedTime: str
     percentComplete: float
     remainingTime: str
+    
 
-
-# TransfersApi
 class TransferedDirectory(TypedDict):
     """
-    TypedDict describing a transfered directory. Element found in :py:class:`~slskd_api.apis.transfers.Transfer`.
+    TypedDict describing a transfered directory. Element found in :py:class:`~Transfer`.
     """
     directory: str  # remote directory
     fileCount: int
@@ -176,7 +199,7 @@ class TransferedDirectory(TypedDict):
 
 class Transfer(TypedDict):
     """
-    TypedDict describing transfer(s) to/from a given user.
+    TypedDict describing transfer(s) to/from a given user. See :py:class:`~slskd_api.apis.TransferApi`.
     """
     username: str
     directories: list[TransferedDirectory]
@@ -184,10 +207,16 @@ class Transfer(TypedDict):
     
 # UsersApi:
 class FileAttribute(TypedDict):
+    """
+    TypedDict describing a file attribute. Defined attributes are added as new keys to :py:class:`~UserFile`.
+    """
     type: str
     value: int
 
 class UserFile(TypedDict):
+    """
+    TypedDict describing a user file. Found in :py:class:`~UserDirectory`.
+    """
     attributeCount: int
     attributes: list[FileAttribute]
     code: int
@@ -196,11 +225,17 @@ class UserFile(TypedDict):
     size: int # in Byte
     
 class UserDirectory(TypedDict):
+    """
+    TypedDict describing a user directory either locked or not. See :py:class:`~UserRootDir`.
+    """
     name: str
     fileCount: int
     files: list[UserFile]
     
 class UserRootDir(TypedDict):
+    """
+    TypedDict describing the root of a user's shares. Returned by :py:meth:`~slskd_api.apis.UsersApi.browse`.
+    """
     directories: list[UserDirectory]
     directoryCount: int
     lockedDirectories: list[UserDirectory]
