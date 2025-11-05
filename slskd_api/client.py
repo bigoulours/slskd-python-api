@@ -82,7 +82,6 @@ class SlskdClient:
         self.events = EventsApi(*base_args)
         self.files = FilesApi(*base_args)
         self.logs = LogsApi(*base_args)
-        self.metrics = MetricsApi(*base_args)
         self.options = OptionsApi(*base_args)
         self.relay = RelayApi(*base_args)
         self.rooms = RoomsApi(*base_args)
@@ -90,6 +89,7 @@ class SlskdClient:
         self.server = ServerApi(*base_args)
         self.session = SessionApi(*base_args)
         self.shares = SharesApi(*base_args)
+        self.telemetry = TelemetryApi(*base_args)
         self.transfers = TransfersApi(*base_args)
         self.users = UsersApi(*base_args)
     

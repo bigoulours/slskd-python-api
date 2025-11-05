@@ -15,15 +15,23 @@
 
 from ._base import *
 
-class MetricsApi(BaseApi):
+class TelemetryApi(BaseApi):
     """
     This class contains the methods to interact with the Metrics API.
     """
 
-    def get(self) -> str:
+    def get_metrics(self) -> str:
         """
         Gets the Prometheus metrics as text.
         """
-        url = self.api_url + '/metrics'
+        url = self.api_url + '/telemetry/metrics'
+        response = self.session.get(url)
+        return response.text
+    
+    def get_kpi(self) -> str:
+        """
+        Gets application KPIs.
+        """
+        url = self.api_url + '/telemetry/metrics/kpi'
         response = self.session.get(url)
         return response.text

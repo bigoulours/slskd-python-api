@@ -18,7 +18,6 @@ from .conversations import ConversationsApi
 from .events import EventsApi
 from .files import FilesApi
 from .logs import LogsApi
-from .metrics import MetricsApi
 from .options import OptionsApi
 from .relay import RelayApi
 from .rooms import RoomsApi
@@ -26,6 +25,7 @@ from .searches import SearchesApi
 from .server import ServerApi
 from .session import SessionApi
 from .shares import SharesApi
+from .telemetry import TelemetryApi
 from .transfers import TransfersApi
 from .users import UsersApi
 
@@ -35,7 +35,6 @@ __all__ = (
     'EventsApi',
     'FilesApi',
     'LogsApi',
-    'MetricsApi',
     'OptionsApi',
     'RelayApi',
     'RoomsApi',
@@ -43,6 +42,7 @@ __all__ = (
     'ServerApi',
     'SessionApi',
     'SharesApi',
+    'TelemetryApi',
     'TransfersApi',
     'UsersApi'
 )
