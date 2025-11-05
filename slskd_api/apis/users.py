@@ -22,7 +22,7 @@ class UsersApi(BaseApi):
     This class contains the methods to interact with the Users API.
     """
 
-    def address(self, username: str) -> dict:
+    def address(self, username: str) -> UserAddress:
         """
         Retrieves the address of the specified username.
         """
@@ -40,7 +40,7 @@ class UsersApi(BaseApi):
         return response.json()
     
 
-    def browsing_status(self, username: str) -> dict:
+    def browsing_status(self, username: str) -> BrowsingStatus:
         """
         Retrieves the status of the current browse operation for the specified username, if any.
         Will return error 404 if called after the browsing operation has ended.
@@ -64,7 +64,7 @@ class UsersApi(BaseApi):
         return response.json()
     
 
-    def info(self, username: str) -> dict:
+    def info(self, username: str) -> UserInfo:
         """
         Retrieves information about the specified username.
         """
@@ -73,7 +73,7 @@ class UsersApi(BaseApi):
         return response.json()
     
 
-    def status(self, username: str) -> dict:
+    def status(self, username: str) -> UserStatus:
         """
         Retrieves status for the specified username.
         """

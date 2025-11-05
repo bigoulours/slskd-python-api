@@ -14,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from ._base import *
+from ._types import *
 
 class ConversationsApi(BaseApi):
     """
@@ -53,7 +54,7 @@ class ConversationsApi(BaseApi):
         return response.ok
     
 
-    def get(self, username: str, includeMessages: bool = True) -> dict:
+    def get(self, username: str, includeMessages: bool = True) -> Conversation:
         """
         Gets the conversation associated with the specified username.
         """
@@ -76,7 +77,7 @@ class ConversationsApi(BaseApi):
         return response.ok
     
 
-    def get_all(self, includeInactive: bool = False, unAcknowledgedOnly : bool = False) -> list:
+    def get_all(self, includeInactive: bool = False, unAcknowledgedOnly : bool = False) -> list[Conversation]:
         """
         Gets all active conversations.
         """
@@ -89,7 +90,7 @@ class ConversationsApi(BaseApi):
         return response.json()
     
 
-    def get_messages(self, username: str, unAcknowledgedOnly : bool = False) -> list:
+    def get_messages(self, username: str, unAcknowledgedOnly : bool = False) -> list[Message]:
         """
         Gets all messages associated with the specified username.
         """

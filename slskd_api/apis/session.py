@@ -14,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from ._base import *
+from ._types import *
 
 class SessionApi(BaseApi):
     """
@@ -29,7 +30,7 @@ class SessionApi(BaseApi):
         return response.ok
     
 
-    def login(self, username: str, password: str) -> dict:
+    def login(self, username: str, password: str) -> SessionStatus:
         """
         Logs in.
 

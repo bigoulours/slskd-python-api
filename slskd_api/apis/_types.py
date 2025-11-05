@@ -21,14 +21,40 @@ class AppState(TypedDict):
     pendingReconnect: bool
     pendingRestart: bool
     server: 'ServerState'
-    # TODO: describe as TypedDict
+    # TODO: describe as TypedDict?
     connectionWatchdog: dict
     relay: dict
     user: dict
     distributedNetwork: dict
     shares: dict
-    rooms: list
+    rooms: list[str] # list of joined rooms
     users: list
+
+
+# ConversationsApi
+MessageDirection: TypeAlias = Literal["Out", "In"]
+
+class Message(TypedDict):
+    """
+    TypedDict describing a message. Element of :py:class:`~Conversation`.
+    """
+    timestamp: str
+    id: int
+    username: str
+    direction: MessageDirection
+    message: str
+    isAcknowledged: bool
+    wasReplayed: bool
+
+class Conversation(TypedDict):
+    """
+    TypedDict describing a conversation. Returned by :py:meth:`~slskd_api.apis.conversations.get`.
+    """
+    username: str
+    isActive: bool
+    unAcknowledgedMessageCount: int
+    hasUnAcknowledgedMessages: bool
+    messages: NotRequired[list[Message]] # not included in response from get_all
 
 
 # EventsApi:
@@ -79,6 +105,51 @@ class LogEntry(TypedDict):
     context: str
     level: str
     message: str
+
+
+# RoomsApi:
+class RoomMessage(TypedDict):
+    """
+    TypedDict describing a message in a room. See :py:class:`~Room`.
+    """
+    timestamp: str
+    username: str
+    message: str
+    roomName: str
+
+class RoomInfo(TypedDict):
+    """
+    TypedDict describing room info.
+    """
+    name: str
+    userCount: int
+    isPrivate: bool
+    isOwned: bool
+    isModerated: bool
+    
+class RoomUser(TypedDict):
+    """
+    TypedDict describing a room user.
+    """
+    averageSpeed: int
+    countryCode: str
+    directoryCount: int
+    fileCount: int
+    slotsFree: int
+    status: 'UserPresence'
+    uploadCount: int
+    username: str
+    
+    
+class Room(TypedDict):
+    """
+    TypedDict describing a room. Returned by :py:meth:`~slskd_api.apis.RoomsApi.join`
+    and :py:meth:`~slskd_api.apis.RoomsApi.get_joined`.
+    """
+    name: str
+    isPrivate: bool
+    users: list[RoomUser]
+    messages: list[RoomMessage]
 
 
 # SearchApi:
@@ -142,8 +213,21 @@ class ServerState(TypedDict):
     isTransitioning: bool  
 
 
+# SessionApi:
+class SessionStatus(TypedDict):
+    """
+    TypedDict describing session status. Returned by :py:meth:`~slskd_api.apis.SessionApi.login`.
+    """
+    expires: int
+    issued: int
+    name: str
+    notBefore: int
+    token: str
+    tokenType: str
+
+
 # SharesApi:
-class SharedDir(TypedDict):
+class ShareInfo(TypedDict):
     """
     TypedDict describing a shared directory. Returned :py:meth:`~slskd_api.apis.SharesApi.get`.
     """
@@ -156,12 +240,11 @@ class SharedDir(TypedDict):
     directories: int
     files: int
 
-
 class Shares(TypedDict):
     """
     TypedDict describing all shares (local or from relays). Returned :py:meth:`~slskd_api.apis.SharesApi.get_all`.
     """
-    local: list[SharedDir]
+    local: list[ShareInfo]
 
 
 # TransfersApi
@@ -206,6 +289,44 @@ class Transfer(TypedDict):
 
     
 # UsersApi:
+class UserAddress(TypedDict):
+    """
+    TypedDict describing a user IP address. Returned by :py:meth:`~slskd_api.apis.UsersApi.address`.
+    """
+    addressFamily: str
+    address: str
+    port: int
+    
+class BrowsingStatus(TypedDict):
+    """
+    TypedDict describing browsing status of a user's shares. Returned by :py:meth:`~slskd_api.apis.UsersApi.browsing_status`.
+    """
+    bytesTransferred: int
+    bytesRemaining: int
+    percentComplete: int
+    size: int
+    username: str
+    
+class UserInfo(TypedDict):
+    """
+    TypedDict describing user info. Returned by :py:meth:`~slskd_api.apis.UsersApi.info`.
+    """
+    description: str
+    hasFreeUploadSlot: bool
+    hasPicture: bool
+    picture: str
+    queueLength: int
+    uploadSlots: int
+
+UserPresence: TypeAlias = Literal["Offline", "Away", "Online"]
+
+class UserStatus(TypedDict):
+    """
+    TypedDict describing user status. Returned by :py:meth:`~slskd_api.apis.UsersApi.status`.
+    """
+    isPrivileged: bool
+    presence: UserPresence
+
 class FileAttribute(TypedDict):
     """
     TypedDict describing a file attribute. Defined attributes are added as new keys to :py:class:`~UserFile`.

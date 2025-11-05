@@ -52,7 +52,7 @@ class SharesApi(BaseApi):
         return response.ok
     
 
-    def get(self, id: str) -> SharedDir:
+    def get(self, id: str) -> ShareInfo:
         """
         Gets the share associated with the specified id.
         """
@@ -61,7 +61,7 @@ class SharesApi(BaseApi):
         return response.json()
     
 
-    def all_contents(self) -> list:
+    def all_contents(self) -> list[UserDirectory]:
         """
         Returns a list of all shared directories and files.
         """
@@ -70,7 +70,7 @@ class SharesApi(BaseApi):
         return response.json()
     
 
-    def contents(self, id: str) -> list:
+    def contents(self, id: str) -> list[UserDirectory]:
         """
         Gets the contents of the share associated with the specified id.
         """
