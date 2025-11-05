@@ -40,6 +40,8 @@ class FilesApi(BaseApi):
     def get_downloaded_directory(self, base64SubdirectoryName: str, recursive: bool = False) -> Directory:
         """
         Lists the contents of the specified subdirectory within the downloads directory.
+        
+        :param recursive: whether to recursively list subdirectories and files.
         """
         url = self.api_url + '/files/downloads/directories/' + base64SubdirectoryName
         params = dict(
@@ -70,6 +72,8 @@ class FilesApi(BaseApi):
     def get_incomplete_dir(self, recursive: bool = False) -> Directory:
         """
         Lists the contents of the incomplete directory.
+        
+        :param recursive: whether to recursively list subdirectories and files.
         """
         url = self.api_url + '/files/incomplete/directories'
         params = dict(
@@ -82,6 +86,8 @@ class FilesApi(BaseApi):
     def get_incomplete_directory(self, base64SubdirectoryName: str, recursive: bool = False) -> Directory:
         """
         Lists the contents of the specified subdirectory within the incomplete directory.
+        
+        :param recursive: whether to recursively list subdirectories and files.
         """
         url = self.api_url + '/files/incomplete/directories/' + base64SubdirectoryName
         params = dict(

@@ -45,12 +45,6 @@ ____________
 .. autoclass:: slskd_api.apis.LogsApi
    :members:
 
-apis/metrics.py
-____________
-
-.. autoclass:: slskd_api.apis.MetricsApi
-   :members:
-
 apis/options.py
 _______________
 
@@ -91,6 +85,12 @@ apis/shares.py
 ______________
 
 .. autoclass:: slskd_api.apis.SharesApi
+   :members:
+
+apis/telemetry.py
+_________________
+
+.. autoclass:: slskd_api.apis.TelemetryApi
    :members:
 
 apis/transfers.py
