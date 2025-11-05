@@ -13,14 +13,16 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .base import *
+from ._base import *
+from ._types import *
+
 
 class LogsApi(BaseApi):
     """
     This class contains the methods to interact with the Logs API.
     """
 
-    def get(self) -> list:
+    def get(self) -> list[LogEntry]:
         """
         Gets the last few application logs.
         """

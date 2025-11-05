@@ -13,14 +13,15 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .base import *
+from ._base import *
+from ._types import *
 
 class SharesApi(BaseApi):
     """
     This class contains the methods to interact with the Shares API.
     """
 
-    def get_all(self) -> dict:
+    def get_all(self) -> Shares:
         """
         Gets the current list of shares.
         """
@@ -51,7 +52,7 @@ class SharesApi(BaseApi):
         return response.ok
     
 
-    def get(self, id: str) -> dict:
+    def get(self, id: str) -> ShareInfo:
         """
         Gets the share associated with the specified id.
         """
@@ -60,7 +61,7 @@ class SharesApi(BaseApi):
         return response.json()
     
 
-    def all_contents(self) -> list:
+    def all_contents(self) -> list[UserDirectory]:
         """
         Returns a list of all shared directories and files.
         """
@@ -69,7 +70,7 @@ class SharesApi(BaseApi):
         return response.json()
     
 
-    def contents(self, id: str) -> list:
+    def contents(self, id: str) -> list[UserDirectory]:
         """
         Gets the contents of the share associated with the specified id.
         """

@@ -79,45 +79,17 @@ class SlskdClient:
         
         self.application = ApplicationApi(*base_args)
         self.conversations = ConversationsApi(*base_args)
+        self.events = EventsApi(*base_args)
+        self.files = FilesApi(*base_args)
         self.logs = LogsApi(*base_args)
         self.options = OptionsApi(*base_args)
-        self.public_chat = PublicChatApi(*base_args)
         self.relay = RelayApi(*base_args)
         self.rooms = RoomsApi(*base_args)
         self.searches = SearchesApi(*base_args)
         self.server = ServerApi(*base_args)
         self.session = SessionApi(*base_args)
         self.shares = SharesApi(*base_args)
+        self.telemetry = TelemetryApi(*base_args)
         self.transfers = TransfersApi(*base_args)
         self.users = UsersApi(*base_args)
     
-
-class MetricsApi:
-    """
-    Getting the metrics works with a different endpoint. Default: <slskd_url>:5030/metrics.
-    Metrics should be first activated in slskd config file.
-    User/pass is independent from the main application and default value (slskd:slskd) should be changed.
-    Usage::
-        metrics_api = slskd_api.MetricsApi(host, metrics_usr='slskd', metrics_pwd='slskd')
-        metrics = metrics_api.get()
-    """
-
-    def __init__(self,
-                 host: str,
-                 metrics_usr: str = 'slskd',
-                 metrics_pwd: str = 'slskd',
-                 metrics_url_base: str = '/metrics'
-    ):
-        self.metrics_url = urljoin(host, metrics_url_base)
-        basic_auth = b64encode(bytes(f'{metrics_usr}:{metrics_pwd}', 'utf-8'))
-        self.header = {
-            'accept': '*/*',
-            'Authorization': f'Basic {basic_auth.decode()}' 
-        }
-
-    def get(self) -> str:
-        """
-        Gets the Prometheus metrics as text.
-        """
-        response = requests.get(self.metrics_url, headers=self.header)
-        return response.text

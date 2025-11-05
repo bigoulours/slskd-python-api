@@ -13,6 +13,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .client import SlskdClient, MetricsApi
+from .client import SlskdClient
 
-__all__ = ('SlskdClient', 'MetricsApi')
+__all__ = ('SlskdClient')

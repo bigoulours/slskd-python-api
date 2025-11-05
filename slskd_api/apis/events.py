@@ -16,39 +16,35 @@
 from ._base import *
 from ._types import *
 
-class SessionApi(BaseApi):
+
+class EventsApi(BaseApi):
     """
-    This class contains the methods to interact with the Session API.
+    This class contains the methods to interact with the Events API.
     """
 
-    def auth_valid(self) -> bool:
+    def get(self,
+            start: int = 0,
+            limit: int = 100,
+        ) -> list[Event]:
         """
-        Checks whether the provided authentication is valid.
+        Retrieves a paginated list of past event records.
+        
+        :param start: The offset (number of records) at which to start the requested page.
+        :param limit: The page size.
         """
-        url = self.api_url + '/session'
+        url = self.api_url + '/events'
         response = self.session.get(url)
-        return response.ok
-    
+        return response.json()
 
-    def login(self, username: str, password: str) -> SessionStatus:
+    def create(self,
+            event_type: EventType,
+            data: str = '', # TODO: figure out how this works
+        ) -> bool:
         """
-        Logs in.
+        Raises a sample event of the specified type.
 
-        :return: Session info for the given user incl. token.
+        :return: True if successful.
         """
-        url = self.api_url + '/session'
-        data = {
-            'username': username,
-            'password': password
-        }
+        url = self.api_url + f'/events/{event_type}'
         response = self.session.post(url, json=data)
-        return response.json()
-    
-
-    def security_enabled(self) -> bool:
-        """
-        Checks whether security is enabled.
-        """
-        url = self.api_url + '/session/enabled'
-        response = self.session.get(url)
-        return response.json()
+        return response.ok

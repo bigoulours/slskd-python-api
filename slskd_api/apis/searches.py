@@ -13,54 +13,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .base import *
+from ._base import *
 import uuid
-from typing import Optional, TypedDict
-
-
-class SearchFile(TypedDict):
-    """
-    TypedDict describing a single search file result. Element found in :py:class:`~slskd_api.apis.searches.SearchResponseItem`.
-    """
-    filename: str
-    size: int
-    code: int
-    isLocked: bool
-    extension: str
-    bitRate: int # for lossy format
-    bitDepth: int # for lossless format
-    length: int # in sec
-    sampleRate: int # in Hz
-
-class SearchResponseItem(TypedDict):
-    """
-    TypedDict describing a search response item. Single element of list returned by :py:meth:`~slskd_api.apis.SearchesApi.search_responses`.
-    """
-    fileCount: int
-    files: list[SearchFile]
-    hasFreeUploadSlot: bool
-    lockedFileCount: int
-    lockedFiles: list[SearchFile]
-    queueLength: int
-    token: int
-    uploadSpeed: int
-    username: str
-
-class SearchState(TypedDict):
-    """
-    TypedDict describing search state. Returned by :py:meth:`~slskd_api.apis.SearchesApi.state`.
-    """
-    endedAt: str
-    fileCount: int
-    id: str
-    isComplete: bool
-    lockedFileCount: int
-    responseCount: int
-    responses: list[SearchResponseItem]
-    searchText: str
-    startedAt: str  # ISO date
-    state: str
-    token: int
+from ._types import *
 
 
 class SearchesApi(BaseApi):
@@ -70,7 +25,7 @@ class SearchesApi(BaseApi):
 
     def search_text(self,
                     searchText: str,
-                    id: Optional[str] = None,
+                    id: str = None,
                     fileLimit: int = 10000,
                     filterResponses: bool = True,
                     maximumPeerQueueLength: int = 1000000,
@@ -78,7 +33,7 @@ class SearchesApi(BaseApi):
                     minimumResponseFileCount: int = 1,
                     responseLimit: int = 100,
                     searchTimeout: int = 15000
-        ) -> dict:
+        ) -> SearchState:
         """
         Performs a search for the specified request.
 
@@ -116,7 +71,7 @@ class SearchesApi(BaseApi):
         return response.json()
     
 
-    def get_all(self) -> list:
+    def get_all(self) -> list[SearchState]:
         """
         Gets the list of active and completed searches.
         """
@@ -152,7 +107,7 @@ class SearchesApi(BaseApi):
         return response.ok
     
 
-    def delete(self, id: str):
+    def delete(self, id: str) -> bool:
         """
         Deletes the search corresponding to the specified id.
 
@@ -166,6 +121,9 @@ class SearchesApi(BaseApi):
     def search_responses(self, id: str) -> list[SearchResponseItem]:
         """
         Gets search responses corresponding to the specified id.
+        
+        :param id: uuid of the search.
+        :return: Search responses.
         """
         url = self.api_url + f'/searches/{id}/responses'
         response = self.session.get(url)

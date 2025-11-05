@@ -7,8 +7,13 @@ _________
 .. autoclass:: slskd_api.SlskdClient
    :members:
 
-.. autoclass:: slskd_api.MetricsApi
+apis/_types.py
+___________________
+
+.. automodule:: slskd_api.apis._types
    :members:
+   :undoc-members:
+   :no-index-entry:
 
 apis/application.py
 ___________________
@@ -22,6 +27,18 @@ _____________________
 .. autoclass:: slskd_api.apis.ConversationsApi
    :members:
 
+apis/events.py
+______________
+
+.. autoclass:: slskd_api.apis.EventsApi
+   :members:
+
+apis/files.py
+______________
+
+.. autoclass:: slskd_api.apis.FilesApi
+   :members:
+
 apis/logs.py
 ____________
 
@@ -32,12 +49,6 @@ apis/options.py
 _______________
 
 .. autoclass:: slskd_api.apis.OptionsApi
-   :members:
-
-apis/public_chat.py
-___________________
-
-.. autoclass:: slskd_api.apis.PublicChatApi
    :members:
 
 apis/relay.py
@@ -55,31 +66,11 @@ _____________
 apis/searches.py
 ________________
 
-.. autoclass:: slskd_api.apis.searches.SearchFile
-   :members:
-   :undoc-members:
-   :no-index-entry:
-
-.. autoclass:: slskd_api.apis.searches.SearchResponseItem
-   :members:
-   :undoc-members:
-   :no-index-entry:
-
-.. autoclass:: slskd_api.apis.searches.SearchState
-   :members:
-   :undoc-members:
-   :no-index-entry:
-
 .. autoclass:: slskd_api.apis.SearchesApi
    :members:
 
 apis/server.py
 ______________
-
-.. autoclass:: slskd_api.apis.server.ServerState
-   :members:
-   :undoc-members:
-   :no-index-entry:
 
 .. autoclass:: slskd_api.apis.ServerApi
    :members:
@@ -96,23 +87,14 @@ ______________
 .. autoclass:: slskd_api.apis.SharesApi
    :members:
 
-apis/transfers.py
+apis/telemetry.py
 _________________
 
-.. autoclass:: slskd_api.apis.transfers.TransferedFile
+.. autoclass:: slskd_api.apis.TelemetryApi
    :members:
-   :undoc-members:
-   :no-index-entry:
 
-.. autoclass:: slskd_api.apis.transfers.TransferedDirectory
-   :members:
-   :undoc-members:
-   :no-index-entry:
-
-.. autoclass:: slskd_api.apis.transfers.Transfer
-   :members:
-   :undoc-members:
-   :no-index-entry:
+apis/transfers.py
+_________________
 
 .. autoclass:: slskd_api.apis.TransfersApi
    :members:

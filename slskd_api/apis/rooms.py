@@ -13,14 +13,15 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .base import *
+from ._base import *
+from ._types import *
 
 class RoomsApi(BaseApi):
     """
     This class contains the methods to interact with the Rooms API.
     """
 
-    def get_all_joined(self) -> list:
+    def get_all_joined(self) -> list[str]:
         """
         Gets all joined rooms.
 
@@ -31,22 +32,18 @@ class RoomsApi(BaseApi):
         return response.json()
     
 
-    def join(self, roomName: str) -> dict:
+    def join(self, roomName: str) -> Room:
         """
         Joins a room.
-
-        :return: room info: name, isPrivate, users, messages
         """
         url = self.api_url + '/rooms/joined'
         response = self.session.post(url, json=roomName)
         return response.json()
 
 
-    def get_joined(self, roomName: str) -> dict:
+    def get_joined(self, roomName: str) -> Room:
         """
         Gets the specified room.
-
-        :return: room info: name, isPrivate, users, messages
         """
         url = self.api_url + f'/rooms/joined/{quote(roomName)}'
         response = self.session.get(url)
@@ -75,7 +72,7 @@ class RoomsApi(BaseApi):
         return response.ok
 
 
-    def get_messages(self, roomName: str) -> list:
+    def get_messages(self, roomName: str) -> list[RoomMessage]:
         """
         Gets the current list of messages for the specified room.
         """
@@ -106,7 +103,7 @@ class RoomsApi(BaseApi):
         return response.ok
     
 
-    def get_users(self, roomName: str) -> list:
+    def get_users(self, roomName: str) -> list[RoomUser]:
         """
         Gets the current list of users for the specified joined room.
         """
@@ -115,7 +112,7 @@ class RoomsApi(BaseApi):
         return response.json()
     
 
-    def get_all(self) -> list:
+    def get_all(self) -> list[RoomInfo]:
         """
         Gets a list of rooms from the server.
         """

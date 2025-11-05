@@ -13,19 +13,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .base import *
-from typing import TypedDict, Literal
-
-class ServerState(TypedDict):
-    """
-    TypedDict describing server state. Returned by :py:meth:`~slskd_api.apis.ServerApi.state`.
-    """
-    address: str
-    ipEndPoint: str
-    state: Literal["Connected, LoggedIn", "Disconnected"] # TODO: not sure if complete, but haven't figured out others.
-    isConnected: bool
-    isLoggedIn: bool
-    isTransitioning: bool
+from ._base import *
+from ._types import *
 
 
 class ServerApi(BaseApi):

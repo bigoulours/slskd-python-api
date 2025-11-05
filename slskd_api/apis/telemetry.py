@@ -13,30 +13,25 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .base import *
+from ._base import *
 
-class PublicChatApi(BaseApi):
+class TelemetryApi(BaseApi):
     """
-    [UNTESTED] This class contains the methods to interact with the PublicChat API.
+    This class contains the methods to interact with the Metrics API.
     """
 
-    def start(self) -> bool:
+    def get_metrics(self) -> str:
         """
-        Starts public chat.
-
-        :return: True if successful.
+        Gets the Prometheus metrics as text.
         """
-        url = self.api_url + '/publicchat'
-        response = self.session.post(url)
-        return response.ok
+        url = self.api_url + '/telemetry/metrics'
+        response = self.session.get(url)
+        return response.text
     
-
-    def stop(self) -> bool:
+    def get_kpi(self) -> str:
         """
-        Stops public chat.
-
-        :return: True if successful.
+        Gets application KPIs.
         """
-        url = self.api_url + '/publicchat'
-        response = self.session.delete(url)
-        return response.ok
+        url = self.api_url + '/telemetry/metrics/kpi'
+        response = self.session.get(url)
+        return response.text
