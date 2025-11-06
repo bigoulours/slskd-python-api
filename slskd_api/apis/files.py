@@ -20,7 +20,6 @@ class FilesApi(BaseApi):
     """
     This class contains the methods to interact with the Files API.
     In order to delete files/directory you need to set `remoteFileManagement: true` in `slskd.yml`.
-    base64 names can be obtained with `base64.encodebytes(<name_as_str>.encode()).decode()`
     """
 
     def get_downloads_dir(self, recursive: bool = False) -> Directory:
@@ -37,13 +36,13 @@ class FilesApi(BaseApi):
         return response.json()
     
 
-    def get_downloaded_directory(self, base64SubdirectoryName: str, recursive: bool = False) -> Directory:
+    def get_downloaded_directory(self, dir_name: str, recursive: bool = False) -> Directory:
         """
         Lists the contents of the specified subdirectory within the downloads directory.
         
         :param recursive: whether to recursively list subdirectories and files.
         """
-        url = self.api_url + '/files/downloads/directories/' + base64SubdirectoryName
+        url = self.api_url + '/files/downloads/directories/' + b64encode(dir_name)
         params = dict(
             recursive=recursive
         )
@@ -51,20 +50,20 @@ class FilesApi(BaseApi):
         return response.json()
 
 
-    def delete_downloaded_directory(self, base64SubdirectoryName: str) -> bool:
+    def delete_downloaded_directory(self, dir_name: str) -> bool:
         """
         Deletes the specified subdirectory within the downloads directory.
         """
-        url = self.api_url + '/files/downloads/directories/' + base64SubdirectoryName
+        url = self.api_url + '/files/downloads/directories/' + b64encode(dir_name)
         response = self.session.delete(url)
         return response.ok
 
 
-    def delete_downloaded_file(self, base64FileName: str) -> bool:
+    def delete_downloaded_file(self, file_name: str) -> bool:
         """
         Deletes the specified file within the downloads directory.
         """
-        url = self.api_url + '/files/downloads/directories/' + base64FileName
+        url = self.api_url + '/files/downloads/directories/' + b64encode(file_name)
         response = self.session.delete(url)
         return response.ok
     
@@ -83,13 +82,13 @@ class FilesApi(BaseApi):
         return response.json()
     
 
-    def get_incomplete_directory(self, base64SubdirectoryName: str, recursive: bool = False) -> Directory:
+    def get_incomplete_directory(self, dir_name: str, recursive: bool = False) -> Directory:
         """
         Lists the contents of the specified subdirectory within the incomplete directory.
         
         :param recursive: whether to recursively list subdirectories and files.
         """
-        url = self.api_url + '/files/incomplete/directories/' + base64SubdirectoryName
+        url = self.api_url + '/files/incomplete/directories/' + b64encode(dir_name)
         params = dict(
             recursive=recursive
         )
@@ -97,19 +96,19 @@ class FilesApi(BaseApi):
         return response.json()
 
 
-    def delete_incomplete_directory(self, base64SubdirectoryName: str) -> bool:
+    def delete_incomplete_directory(self, dir_name: str) -> bool:
         """
         Deletes the specified subdirectory within the incomplete directory.
         """
-        url = self.api_url + '/files/incomplete/directories/' + base64SubdirectoryName
+        url = self.api_url + '/files/incomplete/directories/' + b64encode(dir_name)
         response = self.session.delete(url)
         return response.ok
 
 
-    def delete_incomplete_file(self, base64FileName: str) -> bool:
+    def delete_incomplete_file(self, file_name: str) -> bool:
         """
         Deletes the specified file within the incomplete directory.
         """
-        url = self.api_url + '/files/incomplete/directories/' + base64FileName
+        url = self.api_url + '/files/incomplete/directories/' + b64encode(file_name)
         response = self.session.delete(url)
         return response.ok

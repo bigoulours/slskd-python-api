@@ -15,6 +15,7 @@
 
 import requests
 from urllib.parse import quote
+from base64 import encodebytes
 
 class BaseApi:
     """
@@ -24,3 +25,7 @@ class BaseApi:
     def __init__(self, api_url: str, session: requests.Session):
         self.api_url = api_url
         self.session = session
+        
+
+def b64encode(s: str) -> str:
+    return encodebytes(s.encode()).decode()
