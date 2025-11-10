@@ -90,14 +90,14 @@ class TransfersApi(BaseApi):
         return response.ok
     
 
-    def enqueue(self, username: str, files: list) -> bool:
+    def enqueue(self, username: str, files: list[SearchFile]) -> bool:
         """
         Enqueues the specified download.
 
         :param username: User to download from.
-        :param files: A list of dictionaries in the same form as what's returned 
-            by :py:func:`~slskd_api.apis.SearchesApi.search_responses`:
-            [{'filename': <filename>, 'size': <filesize>}...]
+        :param files: A list of files that can be obtained by 
+            :py:func:`~slskd_api.apis.SearchesApi.search_responses`
+            (see key `files` of :py:class:`~slskd_api.apis._types.SearchResponseItem`).
         :return: True if successful.
         """
         url = self.api_url + f'/transfers/downloads/{quote(username)}'
