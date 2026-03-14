@@ -77,7 +77,7 @@ class OptionsApi(BaseApi):
         :return: True if successful.
         """
         url = self.api_url + '/options/yaml'
-        response = self.session.post(url, json=yaml_content)
+        response = self.session.put(url, json=yaml_content)
         return response.ok
     
 
