@@ -15,6 +15,8 @@
 
 from typing import TypedDict, NotRequired, Literal, TypeAlias, Union
 
+TransferDirection: TypeAlias = Literal["Download", "Upload"]
+
 # ApplicationApi:
 class AppVersion(TypedDict):
     """
@@ -269,7 +271,7 @@ class TransferedFile(TypedDict):
     """
     id: str
     username: str
-    direction: Literal["Download", "Upload"]
+    direction: TransferDirection
     filename: str 
     size: int
     startOffset: int
