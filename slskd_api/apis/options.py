@@ -28,6 +28,16 @@ class OptionsApi(BaseApi):
         response = self.session.get(url)
         return response.json()
     
+    
+    # def patch(self, data: dict) -> dict:
+    #     #TODO: check how it works (returns error 403)
+    #     """
+    #     Overlay the application options with new values.
+    #     """
+    #     url = self.api_url + '/options'
+    #     response = self.session.patch(url, json=data)
+    #     return response.json()
+    
 
     def get_startup(self) -> dict:
         """

@@ -91,3 +91,8 @@ class ApplicationApi(BaseApi):
     #     url = self.api_url + '/application/dump'
     #     response = self.session.get(url)
     #     return response.json()
+    
+    # def loopback(self) -> bool:
+    #     url = self.api_url + '/application/loopback'
+    #     response = self.session.post(url)
+    #     return response.ok

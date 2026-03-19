@@ -42,7 +42,8 @@ class FilesApi(BaseApi):
         
         :param recursive: whether to recursively list subdirectories and files.
         """
-        url = self.api_url + '/files/downloads/directories/' + b64encode(dir_name)
+        base64SubdirectoryName = b64encode(dir_name)
+        url = self.api_url + f'/files/downloads/directories/{base64SubdirectoryName}'
         params = dict(
             recursive=recursive
         )
@@ -54,7 +55,8 @@ class FilesApi(BaseApi):
         """
         Deletes the specified subdirectory within the downloads directory.
         """
-        url = self.api_url + '/files/downloads/directories/' + b64encode(dir_name)
+        base64SubdirectoryName = b64encode(dir_name)
+        url = self.api_url + f'/files/downloads/directories/{base64SubdirectoryName}'
         response = self.session.delete(url)
         return response.ok
 
@@ -63,7 +65,8 @@ class FilesApi(BaseApi):
         """
         Deletes the specified file within the downloads directory.
         """
-        url = self.api_url + '/files/downloads/directories/' + b64encode(file_name)
+        base64FileName = b64encode(file_name)
+        url = self.api_url + f'/files/downloads/directories/{base64FileName}'
         response = self.session.delete(url)
         return response.ok
     
@@ -88,7 +91,8 @@ class FilesApi(BaseApi):
         
         :param recursive: whether to recursively list subdirectories and files.
         """
-        url = self.api_url + '/files/incomplete/directories/' + b64encode(dir_name)
+        base64SubdirectoryName = b64encode(dir_name)
+        url = self.api_url + f'/files/incomplete/directories/{base64SubdirectoryName}'
         params = dict(
             recursive=recursive
         )
@@ -100,7 +104,8 @@ class FilesApi(BaseApi):
         """
         Deletes the specified subdirectory within the incomplete directory.
         """
-        url = self.api_url + '/files/incomplete/directories/' + b64encode(dir_name)
+        base64SubdirectoryName = b64encode(dir_name)
+        url = self.api_url + f'/files/incomplete/directories/{base64SubdirectoryName}'
         response = self.session.delete(url)
         return response.ok
 
@@ -109,6 +114,7 @@ class FilesApi(BaseApi):
         """
         Deletes the specified file within the incomplete directory.
         """
-        url = self.api_url + '/files/incomplete/directories/' + b64encode(file_name)
+        base64FileName = b64encode(file_name)
+        url = self.api_url + f'/files/incomplete/directories/{base64FileName}'
         response = self.session.delete(url)
         return response.ok
