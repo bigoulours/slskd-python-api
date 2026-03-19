@@ -66,7 +66,7 @@ class FilesApi(BaseApi):
         Deletes the specified file within the downloads directory.
         """
         base64FileName = b64encode(file_name)
-        url = self.api_url + f'/files/downloads/directories/{base64FileName}'
+        url = self.api_url + f'/files/downloads/files/{base64FileName}'
         response = self.session.delete(url)
         return response.ok
     
@@ -115,6 +115,6 @@ class FilesApi(BaseApi):
         Deletes the specified file within the incomplete directory.
         """
         base64FileName = b64encode(file_name)
-        url = self.api_url + f'/files/incomplete/directories/{base64FileName}'
+        url = self.api_url + f'/files/incomplete/files/{base64FileName}'
         response = self.session.delete(url)
         return response.ok
