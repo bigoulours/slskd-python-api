@@ -32,11 +32,11 @@ class TelemetryApi(BaseApi):
         return response.text
 
     
-    def get_kpi(self) -> str:
+    def get_kpis(self) -> str:
         """
         Gets application KPIs.
         """
-        url = self.api_url + '/telemetry/metrics/kpi'
+        url = self.api_url + '/telemetry/metrics/kpis'
         response = self.session.get(url)
         return response.text
 
