@@ -6,7 +6,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 
-def parse_swagger():
+
+def parse_swagger(API_VERSION = 0):
 
     with open("test/server_config.yaml", 'r') as f:
         config = yaml.load(f, Loader=yaml.Loader)
@@ -23,12 +24,12 @@ def parse_swagger():
     cats = soup.find_all('div', class_='opblock-tag-section is-open')
 
     for c in cats:
-        title = c.find('h3').find('a', class_='nostyle').find('span').text
+        title = c.find('h3').find('a', class_='nostyle').find('span').text.lower()
         function_dict[title] = []
         funcs = c.find_all('button', class_='opblock-summary-control')
         for f in funcs:
             op = f.find('span', class_='opblock-summary-method').text
-            path = f.find('span', class_='opblock-summary-path').attrs['data-path']
+            path = f.find('span', class_='opblock-summary-path').attrs['data-path'].replace('v{version}', f'v{API_VERSION}')
             function_dict[title].append((op, path))
 
     return function_dict
