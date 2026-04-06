@@ -2,6 +2,7 @@ from os import path
 import sys
 import yaml
 import functools
+from inspect import isclass, signature
 sys.path.append(path.abspath('.'))
 import slskd_api
 
@@ -20,25 +21,55 @@ with open("test/server_config.yaml", 'r') as f:
 slskd = slskd_api.SlskdClient(config['server_url'], api_key=config['api_key'])
 
 
-def test_method(m, t, args):
+def test_method(m, args):
     print(f'Testing {m}...')
-    ta = TypeAdapter(t)
     method = rgetattr(slskd, m)
+    t = signature(method).return_annotation
+    ta = TypeAdapter(t)
     res = method(*args)
+    
+    t_repr = t.__name__ if isclass(t) else t
 
     try:
         ta.validate_python(res)
-        print(f'{m} succesfully returned an object of type {t.__name__}.')
+        print(f'{m} succesfully returned an object of type {t_repr}.')
     except ValidationError as e:
         print(e)
+        
+    return res
 
    
-# list of t-uples with the following structure: (<method>, <return_type>, <method_args>)
+# list of t-uples with the following structure: (<method>, <method_args>)
 api_tests = [
-    ('application.state', slskd_api.apis._types.AppState),
-    ('application.version', str),
-    ('application.check_updates', slskd_api.apis._types.AppVersion),
+    ('application.state', ),
+    ('application.version', ),
+    ('application.check_updates', ),
+    ('conversations.get_all', ),
+    ('events.get', ),
+    ('files.get_downloads_dir', ),
+    ('files.get_incomplete_dir', ),
+    ('logs.get', ),
+    ('options.get', ),
+    ('options.get_startup', ),
+    ('rooms.get_all_joined', ),
+    ('rooms.get_all', ),
+    ('searches.get_all', ),
+    ('server.state', ),
+    ('session.auth_valid', ),
+    ('session.security_enabled', ),
+    ('shares.get_all', ),
+    ('shares.all_contents', ),
+    ('telemetry.get_metrics', ),
+    ('telemetry.get_kpis', ),
+    ('telemetry.get_transfer_summary', ),
+    ('telemetry.get_transfer_histogram', ),
+    ('telemetry.get_transfer_leaderboard', 'Download'),
+    ('telemetry.get_transfer_exceptions', 'Upload'),
+    ('telemetry.get_transfer_exceptions_pareto', 'Upload'),
+    ('telemetry.get_most_dl_directories', ),
+    ('transfers.get_all_downloads', ),
+    ('transfers.get_all_uploads', ),
 ]
 
 for test in api_tests:
-    test_method(test[0], test[1], test[2:])
+    res = test_method(test[0], test[1:])

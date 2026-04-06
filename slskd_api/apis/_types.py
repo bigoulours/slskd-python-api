@@ -93,7 +93,7 @@ class File(TypedDict):
     TypedDict describing a file in the `downloads` or `incomplete` folder. See :py:class:`~slskd_api.apis.FilesApi`.
     """
     name: str
-    fullname: str
+    fullName: str
     length: int
     attributes: str
     createdAt: str
@@ -105,12 +105,12 @@ class Directory(TypedDict):
     TypedDict describing a directory in the `downloads` or `incomplete` folder. See :py:class:`~slskd_api.apis.FilesApi`.
     """
     name: str
-    fullname: str
+    fullName: str
     attributes: str
     createdAt: str
     modifiedAt: str
-    files: list[File]
-    directories: list['Directory']
+    files: NotRequired[list[File]]
+    directories: NotRequired[list['Directory']]
 
 
 # LogsApi:
@@ -277,15 +277,15 @@ class TransferedFile(TypedDict):
     startOffset: int
     state: str
     requestedAt: str
-    enqueuedAt: str
-    startedAt: str
-    endedAt: str
+    enqueuedAt: NotRequired[str]
+    startedAt: NotRequired[str]
+    endedAt: NotRequired[str]
     bytesTransferred: int
     averageSpeed: float
     bytesRemaining: int
-    elapsedTime: str
+    elapsedTime: NotRequired[str]
     percentComplete: float
-    remainingTime: str
+    remainingTime: NotRequired[str]
     
 
 class TransferedDirectory(TypedDict):
