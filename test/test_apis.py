@@ -38,6 +38,8 @@ def test_method(m, args):
         
     return res
 
+
+search_text = t if (t:=config.get('search_text')) else 'something'
    
 # list of t-uples with the following structure: (<method>, <method_args>)
 api_tests = [
@@ -53,6 +55,7 @@ api_tests = [
     ('options.get_startup', ),
     ('rooms.get_all_joined', ),
     ('rooms.get_all', ),
+    ('searches.search_text', search_text),
     ('searches.get_all', ),
     ('server.state', ),
     ('session.auth_valid', ),
@@ -71,5 +74,29 @@ api_tests = [
     ('transfers.get_all_uploads', ),
 ]
 
-for test in api_tests:
-    res = test_method(test[0], test[1:])
+res_dict = {}
+
+for method, *args in api_tests:
+    res = test_method(method, args)
+    match method:
+        case 'conversations.get_all':
+            res_dict['conversations'] = res
+        case 'files.get_downloads_dir':
+            res_dict['downloads_dir'] = res
+        case 'files.get_incomplete_dir':
+            res_dict['incomplete_dir'] = res
+        case 'rooms.get_all_joined':
+            res_dict['joined_rooms'] = res
+        case 'rooms.get_all':
+            res_dict['all_rooms'] = res
+        case 'searches.get_all':
+            res_dict['all_searches'] = res
+        case 'shares.get_all':
+            res_dict['all_shares'] = res
+        case 'shares.all_contents':
+            res_dict['shares_contents'] = res
+        case 'transfers.get_all_downloads':
+            res_dict['all_downloads'] = res
+        case 'transfers.get_all_uploads':
+            res_dict['all_uploads'] = res
+            
