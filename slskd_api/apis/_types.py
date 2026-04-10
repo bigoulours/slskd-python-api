@@ -331,7 +331,7 @@ class UserInfo(TypedDict):
     description: str
     hasFreeUploadSlot: bool
     hasPicture: bool
-    picture: str
+    picture: NotRequired[str]
     queueLength: int
     uploadSlots: int
 

@@ -2,6 +2,7 @@ from os import path
 import sys
 import yaml
 import functools
+from itertools import chain
 from inspect import isclass, signature
 sys.path.append(path.abspath('.'))
 import slskd_api
@@ -149,3 +150,19 @@ if (all_ul := res_dict.get('all_uploads')):
     uls = test_method('transfers.get_uploads', ul_user)
     ul_id = next(f['id'] for d in uls['directories'] for f in d['files'])
     test_method('transfers.get_upload', ul_user, ul_id)
+
+
+user_src = chain(res_dict.get('conversations', []), res_dict.get('all_downloads', []), res_dict.get('all_uploads', []))
+user = next((e['username'] for e in user_src if slskd.users.status(e['username'])['presence']=='Online'), None)
+
+if not user:
+    print("No user found to test users API")
+else:
+    print(f"Testing user API on {user}...") 
+    test_method('users.address', user)
+    usr_root_dir = test_method('users.browse', user)
+    some_dir = next(d['name'] for d in chain(usr_root_dir['directories'], usr_root_dir['lockedDirectories']))
+    test_method('users.directory', user, some_dir)
+    test_method('users.browsing_status', user)
+    test_method('users.info', user)
+    test_method('users.status', user)
