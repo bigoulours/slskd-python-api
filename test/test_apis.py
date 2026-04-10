@@ -21,7 +21,7 @@ with open("test/server_config.yaml", 'r') as f:
 slskd = slskd_api.SlskdClient(config['server_url'], api_key=config['api_key'])
 
 
-def test_method(m, args):
+def test_method(m, *args):
     print(f'Testing {m}...')
     method = rgetattr(slskd, m)
     t = signature(method).return_annotation
@@ -77,7 +77,7 @@ api_tests = [
 res_dict = {}
 
 for method, *args in api_tests:
-    res = test_method(method, args)
+    res = test_method(method, *args)
     match method:
         case 'conversations.get_all':
             res_dict['conversations'] = res
@@ -93,10 +93,59 @@ for method, *args in api_tests:
             res_dict['all_searches'] = res
         case 'shares.get_all':
             res_dict['all_shares'] = res
-        case 'shares.all_contents':
-            res_dict['shares_contents'] = res
         case 'transfers.get_all_downloads':
             res_dict['all_downloads'] = res
         case 'transfers.get_all_uploads':
             res_dict['all_uploads'] = res
             
+
+if (convs := res_dict.get('conversations')):
+    usr = next(c['username'] for c in convs)
+    test_method('conversations.get', usr)
+    test_method('conversations.get_messages', usr)
+    
+
+if (dl_dir := res_dict.get('downloads_dir')):
+    dir_name = next(d['name'] for d in dl_dir.get('directories'))
+    test_method('files.get_downloaded_directory', dir_name)
+    
+    
+if (inc_dir := res_dict.get('incomplete_dir')):
+    dir_name = next(d['name'] for d in inc_dir.get('directories'))
+    test_method('files.get_incomplete_directory', dir_name)
+    
+
+if (rooms := res_dict.get('all_rooms')):
+    joined_rooms = res_dict.get('joined_rooms', [])
+    new_room = next(r['name'] for r in rooms if r['name'] not in joined_rooms)
+    test_method('rooms.join', new_room)
+    test_method('rooms.get_joined', new_room)
+    test_method('rooms.get_messages', new_room)
+    test_method('rooms.get_users', new_room)
+    test_method('rooms.leave', new_room)
+    
+
+if (searches := res_dict.get('all_searches')):
+    search_id = next(s['id'] for s in searches)
+    test_method('searches.state', search_id)
+    test_method('searches.search_responses', search_id)
+    
+
+if (shares := res_dict.get('all_shares')):
+    share_id = next(s['id'] for s in shares['local'])
+    test_method('shares.get', share_id)
+    test_method('shares.contents', share_id)
+    
+    
+if (all_dl := res_dict.get('all_downloads')):
+    dl_user = next(dl['username'] for dl in all_dl)
+    dls = test_method('transfers.get_downloads', dl_user)
+    dl_id = next(f['id'] for d in dls['directories'] for f in d['files'])
+    test_method('transfers.get_download', dl_user, dl_id)
+    
+    
+if (all_ul := res_dict.get('all_uploads')):
+    ul_user = next(ul['username'] for ul in all_ul)
+    uls = test_method('transfers.get_uploads', ul_user)
+    ul_id = next(f['id'] for d in uls['directories'] for f in d['files'])
+    test_method('transfers.get_upload', ul_user, ul_id)

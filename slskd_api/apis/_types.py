@@ -302,7 +302,7 @@ class Transfer(TypedDict):
     TypedDict describing transfer(s) to/from a given user. See :py:class:`~slskd_api.apis.TransfersApi`.
     """
     username: str
-    directories: list[TransferedDirectory]
+    directories: NotRequired[list[TransferedDirectory]]
 
     
 # UsersApi:
