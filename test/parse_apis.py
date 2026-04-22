@@ -19,7 +19,8 @@ def parse_api_fcts(API_VERSION = 0):
             funcs = re.findall(fct_pat, content)
             for f in funcs:
                 url_str = re.search(url_pat, f).group(1).replace('self.api_url', f'/api/v{API_VERSION}')
-                url_str = re.sub(r'''("|f?'| |\+)''', '', url_str)
+                url_str = re.sub(r'''("|( f)?'| |\+)''', '', url_str)
+                url_str = url_str.replace('event_type', 'type')
                 url_str = re.sub(r'quote\((.*?)\)', r'\g<1>', url_str)
                 op = re.search(op_pat, f).group(1).upper()
                 function_dict[title].append((op, url_str))

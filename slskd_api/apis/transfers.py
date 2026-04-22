@@ -118,7 +118,7 @@ class TransfersApi(BaseApi):
         """
         Gets all downloads.
         """
-        url = self.api_url + '/transfers/downloads/'
+        url = self.api_url + '/transfers/downloads'
         params = dict(
             includeRemoved=includeRemoved
         )
@@ -141,7 +141,7 @@ class TransfersApi(BaseApi):
         """
         Gets all uploads.
         """
-        url = self.api_url + '/transfers/uploads/'
+        url = self.api_url + '/transfers/uploads'
         params = dict(
             includeRemoved=includeRemoved
         )
