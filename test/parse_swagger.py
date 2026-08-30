@@ -29,8 +29,13 @@ def parse_swagger(API_VERSION = 0):
         funcs = c.find_all('button', class_='opblock-summary-control')
         for f in funcs:
             op = f.find('span', class_='opblock-summary-method').text
-            path = f.find('span', class_='opblock-summary-path').attrs['data-path'].replace('v{version}', f'v{API_VERSION}')
-            function_dict[title].append((op, path))
+            try:
+                path = f.find('span', class_='opblock-summary-path').attrs['data-path'].replace('v{version}', f'v{API_VERSION}')
+                function_dict[title].append((op, path))
+            except AttributeError:
+                path = f.find('span', class_='opblock-summary-path__deprecated').attrs['data-path'].replace('v{version}', f'v{API_VERSION}')
+                function_dict[title].append((op, path, 'DEPRECATED'))
+            
 
     return function_dict
 
