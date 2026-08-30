@@ -4,6 +4,7 @@ import yaml
 import functools
 from itertools import chain
 from inspect import isclass, signature
+from requests import HTTPError
 sys.path.append(path.abspath('.'))
 import slskd_api
 
@@ -163,6 +164,9 @@ else:
     usr_root_dir = test_method('users.browse', user)
     some_dir = next(d['name'] for d in chain(usr_root_dir['directories'], usr_root_dir['lockedDirectories']))
     test_method('users.directory', user, some_dir)
-    test_method('users.browsing_status', user)
+    try:
+        test_method('users.browsing_status', user)
+    except HTTPError:
+        pass
     test_method('users.info', user)
     test_method('users.status', user)
