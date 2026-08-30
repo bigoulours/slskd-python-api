@@ -75,7 +75,16 @@ class Conversation(TypedDict):
 
 
 # EventsApi:
-EventType: TypeAlias = Literal["DownloadFileComplete", "DownloadDirectoryComplete", "UploadFileComplete", "PrivateMessageReceived", "RoomMessageReceived", "Noop"]
+EventType: TypeAlias = Literal[
+        "SoulseekClientConnected",
+        "SoulseekClientDisconnected",
+        "DownloadFileComplete",
+        "DownloadDirectoryComplete",
+        "UploadFileComplete",
+        "PrivateMessageReceived",
+        "RoomMessageReceived",
+        "Noop"
+    ]
 
 class Event(TypedDict):
     """
@@ -274,7 +283,7 @@ class TransferedFile(TypedDict):
     direction: TransferDirection
     filename: str 
     size: int
-    startOffset: int
+    startOffset: NotRequired[int]
     state: str
     requestedAt: str
     enqueuedAt: NotRequired[str]
